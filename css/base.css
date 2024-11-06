@@ -43,6 +43,15 @@ body.clicky :target::before {
 ul.nav li.main {
     font-weight: bold;
 }
+ul.nav li:not(.main) {
+    text-indent: 2rem;
+}
+.test {
+    display: none;
+}
+ul.nav li.main:hover > .test {
+    display: block;
+}
 
 div.col-md-3 {
     padding-left: 0;
@@ -103,6 +112,8 @@ a > code:hover, a > code:focus {
     padding-top:    10px;
     padding-bottom: 10px;
     border-radius: 5px;
+/*     height: calc(100% - 100px);
+    overflow-y: auto;  添加滚动条 */
 }
 
 /* All levels of nav */
@@ -148,7 +159,9 @@ a > code:hover, a > code:focus {
     }
     .bs-sidebar.affix {
         position: fixed; /* Undo the static from mobile first approach */
-        top: 80px;
+        /*top: 80px;*/
+        height: calc(100% - 100px);
+        overflow-y: auto;
     }
     .bs-sidebar.affix-bottom {
         position: absolute; /* Undo the static from mobile first approach */
@@ -164,6 +177,8 @@ a > code:hover, a > code:focus {
     .bs-sidebar.affix-bottom,
     .bs-sidebar.affix {
         width: 263px;
+        height: calc(100% - 100px);
+        overflow-y: auto;
     }
 }
 
