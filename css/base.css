@@ -13,6 +13,7 @@ body {
  *
  * See <https://github.com/mkdocs/mkdocs/issues/843> for more details.
  */
+  
 :target::before {
     content: "";
     display: block;
@@ -43,14 +44,8 @@ body.clicky :target::before {
 ul.nav li.main {
     font-weight: bold;
 }
-ul.nav li:not(.main) {
+ul.bs-sidenav li:not(.main) {
     text-indent: 2rem;
-}
-.test {
-    display: none;
-}
-ul.nav li.main:hover > .test {
-    display: block;
 }
 
 div.col-md-3 {
