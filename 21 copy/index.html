@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/21%20copy/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>21 复制 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../20%20box%20select/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../22%20delete/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#21">21.复制</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="21">21.复制</h1>
+<p>复制功能是三维软件的基础功能，可以提高用户的操作和设计效率。本节课程我们实现选中元素的复制功能，包括线、组件，以及复制过程的预览效果和命令提示过程。</p>
+<p>同样，复制功能实现的代码量不大，但贯穿了框架体系的多个关键模块，其实也是依赖和复用了框架体系的能力，来实现预览、命令提示、操作数据处理等过程，然后添加对应实现，继续为基础框架抽象和添加基础能力。我们来看工作机制相关的逻辑流程。</p>
+<p><img src="../img/cad/image-80.png" alt="“复制”接口调用逻辑" width="800" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：“复制”接口调用逻辑</figcaption>
+
+<ol>
+<li>点击按钮调用<code>copy</code>进入复制状态，同时调用<code>drawCurve</code>处理预览和完成数据；</li>
+<li>通过<code>ViewerSetting.previewData</code>处理鼠标左键点击事件，第一个点作为复制的基点，后续的连续点作为复制到的目标点，在完成时调用<code>DrawingLinesHolder.CopySelectedData</code>和<code>DrawingComponentHolder.copySelectedData</code>添加复制操作产生的数据；</li>
+<li>在每个渲染循环中调用<code>DrawingLinesHolder.DrawCopyElementsPreview</code>和<code>DrawingComponentHolder.drawCopyElementsPreview</code>将预览效果绘制到<code>GLView</code>中；而复制操作完成添加的数据由对应的<code>draw</code>进行绘制；</li>
+<li>当<code>ESC</code>键按下时，调用<code>ViewerSetting.ClearCopyImData</code>清除相关临时数据；</li>
+</ol>
+<p>在绘制预览数据时采用了实例化渲染的思路，由于此前渲染选中效果时已经将选中数据与渲染的桥梁<code>setup</code>完成，这里只需要更新复制操作偏移计算的（选中元素的）<code>modelMatrix</code>后再次绘制即可。</p>
+<p><img src="../img/cad/image-81.png" alt="小学生水平的绘画巨作" width="500" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：小学生水平的绘画巨作</figcaption>
+
+<p>小学生水平的绘画巨作来了（苦笑），我们来结合框选（线）、点选（组件）来使用复制功能，记得可以根据命令提示系统来实现精确的复制操作哦。</p>
+<p><img src="../img/cad/image-82.png" alt="对“巨作”进行复制" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：对“巨作”进行复制</figcaption>
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>我们顺便做了优化：将<code>DrawingComponentHolder</code>中的<code>bodys</code>、<code>meshes</code>元素类型改为了对应对象的指针，这样<code>vector</code>容器在容量达到阈值时拷贝以开辟更大的容量空间情况下，不会有太多的性能损耗，同时<code>getSelectedBody</code>返回的数据也不至于会偶发的失效（那样的话太不可靠啦）；同时要记得管理好创建在堆上的这些资源哦，在析构函数中、删除组件时等场景中记得释放。</p>
+</div>
+<p>有了上述知识去详细的探究代码将会容易的多，带着好奇心去探究吧~</p>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

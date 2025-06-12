@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/20%20box%20select/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>20 框选选择 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../19%20set%20work%20plane/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../21%20copy/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#20">20.框选选择</a></li>
+        
+            <li><a href="#201">20.1.方式一</a></li>
+        
+            <li><a href="#202">20.2.方式二</a></li>
+        
+            <li><a href="#203">20.3.补充</a></li>
+        
+            <li><a href="#204">20.4.总结</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="20">20.框选选择</h1>
+<p>在三维软件交互中，框选是一种提高工作效率的交互功能，可以根据框选范围选中完全在其中或相交的组件，可以增强用户体验。</p>
+<p>框选框的绘制有多种实现方式，本节介绍其中两种，</p>
+<div class="admonition note">
+<p class="admonition-title">两种绘制框选框方式</p>
+<ol>
+<li>对数据进行预<code>setup</code>，然后在渲染循环中根据当前位置和状态不断的更新<code>modelMatrix</code>以适配当前框的位置和大小，然后绘制；</li>
+<li>在每个渲染循环中，根据鼠标位置实时计算框的位置和尺寸，进行数据的<code>setup</code>和<code>draw</code>（绘制）；</li>
+</ol>
+</div>
+<p>这两种方式各有优缺点，第一种方式避免了频繁搭建数据和渲染桥梁的过程，但需要在每个渲染循环中进行更多的计算：计算当前的<code>modelMatrix</code>；第二种方式需要在每个渲染循环中进行数据和渲染桥梁的搭建，然后绘制，但不用进行过多的计算过程。</p>
+<h2 id="201">20.1.方式一</h2>
+<p>下图描述了方式一的工作流程，</p>
+<p><img src="../img/cad/image-76.png" alt="方式一：构建初始框数据 + 变换形态" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：方式一：构建初始框数据 + 变换形态</figcaption>
+
+<ol>
+<li>预<code>setup</code>初始数据，初始数据为以原点为中心，在<code>XOY</code>平面的单位矩形，后续将（以不同的<code>modelMatrix</code>）不断的渲染该数据；</li>
+<li>屏幕像素位置和深度对应三维空间中的位置，我们根据鼠标初始点击和当前位置，加之深度为<code>0</code>来通过渲染管线矩阵变换的逆过程得到在世界坐标系中的空间位置，构造空间矩形；然后构造初始矩形到空间矩形的变换矩阵，作为<code>modelMatrix</code>设置到顶点着色器中；</li>
+<li>经过渲染管线的处理，空间矩形被绘制在屏幕上，与初始鼠标位置和当前鼠标位置映射的轴对齐矩形；</li>
+</ol>
+<p>计算矩形框的<code>modelMatrix</code>的逻辑看起来有些许复杂，让我们一起探究下，</p>
+<ul>
+<li>首先根据空间矩形框的尺寸构造缩放矩阵；</li>
+<li>然后通过旋转将初始矩形旋转到和空间矩形平行，试想一下将<code>(0，0，1)</code>绕其与空间矩形法向<code>normal</code>叉乘得到的向量<code>rotateDir</code>旋转（<code>(0, 0, 1)</code>和<code>normal</code>的）夹角，使得其与<code>normal</code>同向；</li>
+<li>然后绕空间矩形法向<code>normal</code>旋转，使得处理后的初始矩形轴与空间矩形轴对齐；</li>
+<li>此时处理后的初始矩形中心仍为原点，偏移到空间矩形中心即可~</li>
+</ul>
+<p>我们来看下代码~</p>
+<pre><code class="language-c++">Transform ViewerUtils::getRectSelectMatrix(const vector&lt;Vector3f&gt;&amp; rectData)
+{
+    Vector3f rectX = rectData[2] - rectData[1];
+    Vector3f rectY = rectData[1] - rectData[0];
+
+    //  缩放
+    Vector3f xB(rectX.Length(), 0.0f, 0.0f);
+    Vector3f yB(0.0f, rectY.Length(), 0.0f);
+    Transform matScale(xB, yB, Vector3f::BasicZ, Vector3f::Zero);
+
+    //  旋转到对应面
+    Vector3f normal = (rectX * 100.0).CrossProduct(rectY * 100.0);//兼容值太小情况
+    normal.Normalize();
+    Vector3f nor2 = Vector3f::BasicZ.CrossProduct(normal);
+    double ang2 = Vector3f::BasicZ.Angle(normal);
+    nor2.Normalize();
+    Transform matRotateFace(nor2, ang2);
+
+    //  旋转到轴对齐
+    Vector3f xAxis;
+    Transform::MultVector(matRotateFace, Vector3f::BasicX, xAxis);
+
+    double angXAxis = xAxis.AngleOnPlaneTo(rectX, normal);
+    Transform matRotateAxis(normal, angXAxis);
+
+    //  偏移
+    Vector3f rectCenter = 0.5 * (rectData[0] + rectData[2]);
+    Transform matTrans;
+    matTrans.SetTranslate(rectCenter);
+
+    Transform matRe;
+    Transform::Mult(matTrans, matRotateAxis, matRe);
+
+    Transform matRe2;
+    Transform::Mult(matRe, matRotateFace, matRe2);
+
+    Transform matRe3;
+    Transform::Mult(matRe2, matScale, matRe3);
+
+    return matRe3;
+}
+</code></pre>
+<p>上述代码过程给人的感觉是执行了一些计算过程，同时申请和释放了一些变量，嗯，这貌似不是一种良好的味道，尤其是在频繁执行时；而处理过多也意味着可能的误差累积过程......
+让我们来看下方式二吧~</p>
+<div class="admonition note">
+<p class="admonition-title">提示</p>
+<p>如果采用方式一进行选择框的绘制，那么记得在渲染循环中设置点光源位置为相机位置沿<code>Front</code>逆向偏移一段距离，以让选择框显示效果更亮。</p>
+</div>
+<h2 id="202">20.2.方式二</h2>
+<p><img src="../img/cad/image-77.png" alt="方式二：实时计算、构建和绘制选择框" width="500" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：方式二：实时计算、构建和绘制选择框</figcaption>
+
+<p>方式二的过程流程如上图，</p>
+<ol>
+<li>屏幕像素位置和深度对应三维空间中的位置，我们根据鼠标初始点击和当前位置，加之深度为<code>0</code>来通过渲染管线矩阵变换的逆过程得到在世界坐标系中的空间位置，构造空间矩形；然后<code>setup</code>；</li>
+<li>经过渲染管线的处理，空间矩形被绘制在屏幕上，与初始鼠标位置和当前鼠标位置映射的轴对齐矩形；</li>
+</ol>
+<h2 id="203">20.3.补充</h2>
+<div class="admonition note">
+<p class="admonition-title">思考</p>
+<ul>
+<li>
+<p>为什么我们在计算屏幕点的空间位置时，选择深度为<code>0</code>呢？
+其实选择其他在[0,1]间的深度也可，经过渲染管线的处理同样能渲染到屏幕“正确”位置，但请想一下，我们为什么要显示选择框呢？为了更优化直观的展示选择范围，进而“选中”在其中的元素！</p>
+</li>
+<li>
+<p>怎么判断在选择范围中呢？一种处理办法是考虑是否在“框选”的透视平截头体中对应空间内，也就是深度为<code>0</code>和深度为<code>1</code>构造的两个矩形拉伸的融合体范围内的元素。</p>
+</li>
+</ul>
+</div>
+<p>构造好框选的融合体后，我们可以进一步构造空间<code>BSP</code>树，然后快速的判断场景中的元素是否在<code>BSP</code>树对应的空间内。</p>
+<div class="admonition note">
+<p class="admonition-title">提示</p>
+<p>我们实现的框选支持正选与反选，快来试着操作一下吧，向左上、右上、左下、右下画框选框，具体逻辑可自行思考~</p>
+</div>
+<h2 id="204">20.4.总结</h2>
+<p>作者（<code>哈市雪花</code>）在<code>GLViewer</code>中采用了方式二来绘制框选框，二者各有优点，方式二具有更优的效率、准确性和可靠性，但其增加了相对多的接口。</p>
+<p>我们回顾下框选实现逻辑，</p>
+<ol>
+<li>点击按钮调用<code>boxSelect</code>进入框选状态，此时会屏蔽鼠标操作相机动作；</li>
+<li>点击鼠标左键不放，进行移动过程中不断的调用<code>ViewerSetting.UpdateRectSelect</code>更新选择框位置；</li>
+<li>鼠标左键松开时，清理当前选择内容，根据构造的选择空间（透视平截头体内连接近平面和远平面的融合体）调用<code>Model.UpdateSelectInfo</code>识别选择元素；同时调用<code>ViewerSetting.ClearRectSelect</code>清理选择框数据。</li>
+</ol>
+<p><img src="../img/cad/image-78.png" alt="“框选实现”接口调用逻辑" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：“框选实现”接口调用逻辑</figcaption>
+
+<p>如果一切正常，或者遇到的问题被排查解决，那么运行之后的效果如下，有问题或疑问请查看工程代码或联系我。</p>
+<p><img src="../img/cad/image-79.png" alt="框选效果" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：框选效果</figcaption>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

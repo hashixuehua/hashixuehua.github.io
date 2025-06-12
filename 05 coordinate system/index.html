@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/05%20coordinate%20system/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>05 坐标系统 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../04%20hello%20Triangle/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../06%20add%20camera/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#5">5.坐标系统</a></li>
+        
+            <li><a href="#51">5.1.坐标转换</a></li>
+        
+            <li><a href="#52">5.2.适配我们的程序</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="5">5.坐标系统</h1>
+<p>在顶点着色器运行后，点需要转换为标准化设备坐标(<code>Normalized Device Coordinate, NDC</code>)，然后绘制在<code>x,y,z</code>都为<code>[-1,1]</code>之间的范围内，此范围外的顶点都不可见。在此之后，会传入光栅器，变为屏幕上的二维坐标或像素。</p>
+<p>我们关心如下几个坐标系：</p>
+<ul>
+<li>局部空间(<code>Local Space</code>，或者称为物体空间(<code>Object Space</code>))</li>
+<li>世界空间(<code>World Space</code>)</li>
+<li>观察空间(<code>View Space</code>，或者称为视觉空间(<code>Eye Space</code>))</li>
+<li>裁剪空间(<code>Clip Space</code>)</li>
+<li>屏幕空间(<code>Screen Space</code>)</li>
+</ul>
+<h2 id="51">5.1.坐标转换</h2>
+<p>可以使用变换矩阵表示不同坐标系间的转换，最重要的是模型(<code>Model</code>)、观察(<code>View</code>)、投影(<code>Projection</code>)三个矩阵，顶点会经历局部空间(<code>Local Space</code>)，世界坐标(<code>World Coordinate</code>)，观察坐标(<code>View Coordinate</code>)，裁剪坐标(<code>Clip Coordinate</code>)，并最后以屏幕坐标(<code>Screen Coordinate</code>)的形式结束。</p>
+<p><img src="../img/cad/image-16.png" alt="坐标转换" title="坐标转换" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：坐标转换（图源：https://learnopengl.com/）</figcaption>
+
+<ol>
+<li>局部坐标是对象相对于局部原点的坐标，也是物体起始的坐标。</li>
+<li>下一步是将局部坐标变换为世界空间坐标，世界空间坐标是处于一个更大的空间范围的。这些坐标相对于世界的全局原点，它们会和其它物体一起相对于世界的原点进行摆放。</li>
+<li>接下来我们将世界坐标变换为观察空间坐标，使得每个坐标都是从摄像机或者说观察者的角度进行观察的。</li>
+<li>坐标到达观察空间之后，我们需要将其投影到裁剪坐标。裁剪坐标会被处理至-1.0到1.0的范围内，并判断哪些顶点将会出现在屏幕上。</li>
+<li>最后，我们将裁剪坐标变换为屏幕坐标，我们将使用一个叫做视口变换(<code>Viewport Transform</code>)的过程。视口变换将位于-1.0到1.0范围的坐标变换到由<code>glViewport</code>函数所定义的坐标范围内。最后变换出来的坐标将会送到光栅器，将其转化为片段。</li>
+</ol>
+<p>上述第4步通常会使用投影矩阵将观察空间中的顶点坐标转换到-1.0到1.0范围内（即裁剪坐标），该投影矩阵可以有两种不同形式，即正射投影矩阵(<code>Orthographic Projection Matrix</code>)或一个透视投影矩阵(<code>Perspective Projection Matrix</code>)，每种形式都定义了不同的<strong>平截头体</strong>。</p>
+<p>在本课程中我们使用透视投影矩阵，更接近于真实世界中的效果。</p>
+<p><img src="../img/cad/1745289021413.jpg" alt="透视效果" title="透视效果" width="300" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：透视效果</figcaption>
+
+<p><img src="../img/cad/image-17.png" alt="透视平截头体" title="透视平截头体" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：透视平截头体</figcaption>
+
+<pre><code class="language-c++">    QMatrix4x4 projection;
+    projection.perspective((m_camera.Zoom), (float)m_camera.SCR_WIDTH / (float)m_camera.SCR_HEIGHT, 0.1f, 100.0f);
+</code></pre>
+<ul>
+<li>参数1：FOV(Field of View)；</li>
+<li>参数2：宽高比；</li>
+<li>参数3：近平面距离；</li>
+<li>参数4：远平面距离；</li>
+</ul>
+<p>在顶点着色器中将会执行下面的过程，得到裁剪坐标并将结果赋值到<code>gl_Position</code></p>
+<p><img src="../img/cad/Local2Clip-1.png" alt="转换为裁剪坐标" title="转换为裁剪坐标" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：转换为裁剪坐标</figcaption>
+
+<div class="admonition note">
+<p class="admonition-title">注意：</p>
+<ul>
+<li>之后OpenGL会对裁剪坐标执行透视除法，转换为<code>标准化设备坐标</code>；</li>
+<li>在转换为<code>标准化设备坐标</code>之后，OpenGL会使用glViewPort内部的参数来将标准化设备坐标映射到屏幕坐标，即视口变换，试想一下，[-1,-1,-1]到[1,1,1]空间中的点被映射到了<code>800x600</code>屏幕上显示，很有趣吧？</li>
+</ul>
+</div>
+<h2 id="52">5.2.适配我们的程序</h2>
+<p>在上节课程中，我们通过<code>标准化设备坐标</code>范围内的3个顶点绘制了三角形，在顶点着色器中没有进行任何坐标转换，之后成功绘制出来。</p>
+<p>在实际项目中顶点坐标是各式各样的，需要在顶点着色器中进行坐标转换，转换为裁剪坐标，我们需要对此前项目进行适配，</p>
+<ul>
+<li>引入坐标变换矩阵modelMat、viewMat和projectionMat，均为单位矩阵；</li>
+<li>修改顶点着色器，将顶点转换为裁剪坐标；</li>
+</ul>
+<pre><code class="language-c++">#version 450 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+}
+</code></pre>
+<p>这样，在模拟场景中我们从固定位置观察三角形，并将效果展示在屏幕上，如果没有错误的话，你将看到如下效果。</p>
+<p><img src="../img/cad/image-19.png" alt="三角形绘制出来" title="三角形绘制出来" width="500" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：三角形绘制出来</figcaption>
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>1）本节中我们使用了<code>VS2022</code>进行项目的打开、编译、调试和运行。
+2）注意2个地方可能会出错，需要修改:(1)#include &ldquo;glview.h&rdquo;；(2)src的cmakelists文件中的<code>"find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)"</code>需要去掉<code>"QT5"</code>，如果你没有安装<code>"QT5"</code>；
+3）如果想打开调试控制台，方便（结合<code>qDebug</code>输出）调试，需要修改cmakelist中的<code>WIN32_EXECUTABLE</code>值为<code>FALSE</code>；</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p><strong>提示：</strong> <code>#include &lt;glview.h&gt;</code>可能会报错，这是编译器一般的处理机制，为了更高效的搜寻标准库和第三方库中的头文件，在本项目中<code>glview.h</code>是项目文件，用尖括号包含的话会以标准库和第三方库的方式是寻找，可能找不到，如果想避免这个错误，可以在<code>cmakelists</code>中添加如下代码指定头文件搜索路径：</p>
+</div>
+<pre><code class="language-js">target_include_directories(GLViewer PRIVATE .)
+</code></pre>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
