@@ -350,29 +350,32 @@
         <li class="main active"><a href="#_1">修炼自我，拥抱工业软件潮流</a></li>
         
     
+        <li class="main "><a href="#_2">课程介绍</a></li>
+        
+    
         <li class="main "><a href="#glviewer">GLViewer介绍</a></li>
         
-            <li><a href="#_2">显示</a></li>
+            <li><a href="#_3">显示</a></li>
         
-            <li><a href="#_3">相机和场景交互</a></li>
+            <li><a href="#_4">相机和场景交互</a></li>
         
-            <li><a href="#_4">视图立方体</a></li>
+            <li><a href="#_5">视图立方体</a></li>
         
-            <li><a href="#_5">画线</a></li>
+            <li><a href="#_6">画线</a></li>
         
-            <li><a href="#_6">命令和参数驱动系统</a></li>
+            <li><a href="#_7">命令和参数驱动系统</a></li>
         
-            <li><a href="#_7">线数据文件读取和保存</a></li>
+            <li><a href="#_8">线数据文件读取和保存</a></li>
         
-            <li><a href="#_8">显示控制</a></li>
+            <li><a href="#_9">显示控制</a></li>
         
-            <li><a href="#_9">多种类型计算</a></li>
+            <li><a href="#_10">多种类型计算</a></li>
         
-            <li><a href="#_10">造型</a></li>
+            <li><a href="#_11">造型</a></li>
         
-            <li><a href="#_11">图层管理</a></li>
+            <li><a href="#_12">图层管理</a></li>
         
-            <li><a href="#_12">关于</a></li>
+            <li><a href="#_13">关于</a></li>
         
     
     </ul>
@@ -380,7 +383,28 @@
             <div class="col-md-9" role="main">
 
 <h1 id="_1">修炼自我，拥抱工业软件潮流</h1>
-<h1 id="glviewer">GLViewer介绍</h1>
+<h1 id="_2">课程介绍</h1>
+<p>课程将分为上下两部分，<code>《拥抱工业软件潮流：从零开发一款三维CAD软件(上)》</code>和<code>《拥抱工业软件潮流：从零开发一款三维CAD软件(下)》</code>（以下简称<code>《课程上》</code>和<code>《课程下》</code>），其中先期编写的《课程上》主要讲解三维CAD的通用基础部分，包括：</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol>
+<li>环境搭建、<code>CMake</code>，<code>OpenGL</code>和<code>QT</code>基础知识、渲染管线知识；</li>
+<li>相机、UI界面、场景元素绘制（工作平面、viewCube、旋转中心标识、鼠标吸附标识）、多种类型线绘制、图片绘制；</li>
+<li>框架结构讲解、预览效果、参数命令系统；</li>
+<li>选中效果、设置工作平面、框选（两种方式）、复制、删除、显示和隐藏；</li>
+<li>图层管理、线框模式、关于、线数据文件打开和保存、其他事项（中文显示、版本信息等）、工具类等内容。</li>
+</ol>
+</div>
+<p>在《课程上》学习前，需要读者有一定的<strong><em><code>C++</code>编程基础</em></strong>，这是必要条件，而如下是建议性的，在课程的基础篇的<code>3.关于OpenGL</code>和<code>5.坐标系统</code>等章节也会有介绍；</p>
+<ul>
+<li>（建议）熟悉<code>OpenGL</code>基础知识，了解渲染管线的概念和工作机制；</li>
+<li>（建议）对仿射变换矩阵原理和使用有基本的了解；</li>
+</ul>
+<p>至于<code>QT</code>，如果此前有过<code>QT</code>使用和编程经验更好，没有的话影响也不大，课程会有对应的操作讲解。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>《课程下》还在整理工作中，敬请期待。</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">友情提示</p>
 <ul>
@@ -388,50 +412,36 @@
 <li>可点击<code>上一节</code>或<code>下一节</code>菜单项快速跳转到上节或下节课程。</li>
 </ul>
 </div>
+<h1 id="glviewer">GLViewer介绍</h1>
 <p><code>GLViewer</code>是一款基于<code>QT</code>，<code>OpenGL</code>和<code>CGLib</code>技术，使用<code>C++语言</code>开发的三维CAD软件，通过分层架构和模块封装组合的框架设计，使其具有轻量、高效、易用和易于维护扩展的特点。</p>
 <p><img src="../img/cad/image-18.png" alt="GLViewer" width="900" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：GLViewer</figcaption>
 
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>课程将分为上下两部分，<code>《拥抱工业软件潮流：从零开发一款三维CAD软件(上)》</code>和<code>《拥抱工业软件潮流：从零开发一款三维CAD软件(下)》</code>（以下简称<code>《课程上》</code>和<code>《课程下》</code>），其中先期编写的《课程上》主要讲解三维CAD的通用基础部分，包括：</p>
-<ol>
-<li><strong>环境搭建、<code>CMake</code>，<code>OpenGL</code>和<code>QT</code>基础知识、渲染管线知识</strong>；</li>
-<li><strong>相机、UI界面、场景元素绘制（工作平面、viewCube、旋转中心标识、鼠标吸附标识）、多种类型线绘制、图片绘制</strong>；</li>
-<li><strong>框架结构讲解、预览效果、参数命令系统</strong>；</li>
-<li><strong>选中效果、设置工作平面、框选（两种方式）、复制、删除、显示和隐藏</strong>；</li>
-<li><strong>图层管理、线框模式、关于、线数据文件打开和保存、其他事项（中文显示、版本信息等）、工具类等内容</strong>。</li>
-</ol>
-</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>《课程下》还在整理工作中，敬请期待。</p>
-</div>
 <p>下文将对<code>GLViewer</code>功能进行较为详细的介绍，注意功能介绍涵盖《课程上》和《课程下》中的内容。</p>
-<h2 id="_2">显示</h2>
+<h2 id="_3">显示</h2>
 <p>二维和三维数据的展示，包括多种线数据、轮廓、图片、三维实体、边线、纹理贴图、文字、填充以及计算结果的展示，且提供实体模式和线框模式两种展示方式。</p>
 <p>支持工作平面的设置和显示；</p>
-<h2 id="_3">相机和场景交互</h2>
+<h2 id="_4">相机和场景交互</h2>
 <p>通过鼠标控制的相机系统，可便捷的进行场景移动、放缩、旋转等交互；</p>
 <p>漫游：可使用<code>WASD</code>按键进行场景漫游；</p>
-<h2 id="_4">视图立方体</h2>
+<h2 id="_5">视图立方体</h2>
 <p>提供视图立方体（<code>viewCube</code>）可方便进行视角的标识和切换；</p>
-<h2 id="_5">画线</h2>
+<h2 id="_6">画线</h2>
 <p>可交互式进行线、多段线、两种方式圆弧、圆、矩形的绘制；支持在三维空间中进行绘制；</p>
 <p>预览：在绘制过程中提供效果预览，提高绘制效率；</p>
 <p>捕捉：支持点捕捉；</p>
 <p>正交模式：支持正交模式的开启和关闭，方便绘制规则元素；</p>
-<h2 id="_6">命令和参数驱动系统</h2>
+<h2 id="_7">命令和参数驱动系统</h2>
 <p>命令和参数驱动：支持命令和参数驱动进行元素的绘制，提高效率和精确性，更加灵活易用；</p>
 <p>在命令状态下支持操作提示的引导；</p>
-<h2 id="_7">线数据文件读取和保存</h2>
+<h2 id="_8">线数据文件读取和保存</h2>
 <p>读取：支持读取目标结构的线数据文件，方便数据的导入；</p>
 <p>保存：支持将当前场景中绘制的线数据进行保存，方便数据的备份和应用；</p>
 <div class="admonition note">
 <p class="admonition-title">注意：</p>
 <p>支持图层数据的读取和保存；</p>
 </div>
-<h2 id="_8">显示控制</h2>
+<h2 id="_9">显示控制</h2>
 <ul>
 <li>模型显隐：支持模型的显示/隐藏切换；</li>
 <li>线显隐：支持线数据的显示/隐藏切换；</li>
@@ -439,7 +449,7 @@
 <li>复制：支持选中构件或线的复制，同样支持交互式和命令参数驱动；</li>
 <li>删除线：支持删除选中的线；</li>
 </ul>
-<h2 id="_9">多种类型计算</h2>
+<h2 id="_10">多种类型计算</h2>
 <div class="admonition note">
 <p class="admonition-title">注意：</p>
 <p>本节中的各种计算调用了<code>CGLib</code>提供的图形几何算法接口，并基于此进行功能实现；
@@ -456,7 +466,7 @@
 <li>清理计算结果：支持对计算结果数据进行清理，便于继续绘制、重新计算或进行其它类型的计算；</li>
 <li>支持文字标签尺寸自动适配，便于不同尺寸轮廓的标记；</li>
 </ol>
-<h2 id="_10">造型</h2>
+<h2 id="_11">造型</h2>
 <div class="admonition note">
 <p class="admonition-title">注意：</p>
 <p>本节中的各种计算调用了<code>CGLib</code>提供的图形几何算法接口，并基于此进行功能实现；
@@ -473,9 +483,9 @@
 <p class="admonition-title">注意：</p>
 <p>如上文提到的<code>GLViewer</code>易于维护和扩展的特点，用户可继续基于<code>GLViewer</code>进行更多实用功能的开发，如搭建构件库、支持更多类型构件的布置建模、开发集自动布置和算量的更多家装功能，甚至开发一款可用于实际工作的钢结构建模软件，当然也需要比较持久的投入。</p>
 </div>
-<h2 id="_11">图层管理</h2>
+<h2 id="_12">图层管理</h2>
 <p>支持图层的新建、删除、激活、颜色编辑；</p>
-<h2 id="_12">关于</h2>
+<h2 id="_13">关于</h2>
 <p>可展示关于软件和作者的更多信息，便于交流和发展。</p>
 <div class="admonition note">
 <p class="admonition-title">友情提示</p>
