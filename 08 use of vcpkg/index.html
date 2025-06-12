@@ -349,7 +349,7 @@
     
         <li class="main active"><a href="#8vcpkg">8.关于vcpkg的使用</a></li>
         
-            <li><a href="#81vcpkgopencv">8.1.通过vcpkg安装opencv</a></li>
+            <li><a href="#81vcpkgopencv">8.1.通过vcpkg安装OpenCV</a></li>
         
             <li><a href="#82vcpkgassimp">8.2.通过vcpkg安装assimp（按需）</a></li>
         
@@ -359,8 +359,15 @@
             <div class="col-md-9" role="main">
 
 <h1 id="8vcpkg">8.关于vcpkg的使用</h1>
-<h2 id="81vcpkgopencv">8.1.通过vcpkg安装opencv</h2>
+<div class="admonition note">
+<p class="admonition-title">补充：</p>
+<p><code>《课程上》</code>暂不涉及<code>OpenCV</code>和<code>assimp</code>库的使用，但在<code>cmakelists</code>文件及工具代码中使用了<code>OpenCV</code>库，建议根据如下教程安装<code>OpenCV</code>。</p>
+</div>
+<h2 id="81vcpkgopencv">8.1.通过vcpkg安装OpenCV</h2>
+<p><code>Vcpkg</code>是由<code>Microsoft</code>和<code>C++社区</code>维护的免费开源<code>C/C++包管理器</code>，可在Windows、macOS和Linux上运行。它是核心的C++工具，使用C++和CMake脚本编写。它旨在解决管理C/C++库的独特难题。</p>
+<p>vcpkg在与<code>CMake</code>、<code>MSBuild</code>环境集成方面具有优势。</p>
 <pre><code class="language-js">cd 到vcpkg安装目录
+# 如此前运行过（比如在安装vcpkg时）`./vcpkg integrate install`，则无须再运行
 ./vcpkg integrate install
 ./vcpkg install opencv4:x64-windows
 </code></pre>
@@ -376,7 +383,7 @@ if (DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE &quot;$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake&quot; CACHE STRING &quot;&quot;)
 endif()
 </code></pre>
-<p>这样可通过<code>vcpkg</code>找到通过其安装的依赖库，包括<code>opencv</code>库，是不是方便了很多？我们可以使用<code>vcpkg</code>统一管理依赖库，然后在不同的项目中方便的使用；</p>
+<p>这样可通过<code>vcpkg</code>找到通过其安装的依赖库，包括<code>OpenCV</code>库，是不是方便了很多？我们可以使用<code>vcpkg</code>统一管理依赖库，然后在不同的项目中方便的使用；</p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <ol>
@@ -387,17 +394,15 @@ endif()
 <p><img src="../img/cad/image-26.png" alt="vcpkg默认配置" title="vcpkg默认配置" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：vcpkg默认配置</figcaption>
 
-<pre><code class="language-js">git clone https://github.com/Microsoft/vcpkg.git
-cd vcpkg
-./bootstrap-vcpkg.bat
-//Linux:~/$ ./bootstrap-vcpkg.sh
+<h2 id="82vcpkgassimp">8.2.通过vcpkg安装assimp（按需）</h2>
+<p>如果需要使用<code>assimp</code>库，相信你已经知道怎么通过<code>vcpkg</code>来安装，并在<code>cmakelists</code>中配置使用了。</p>
+<pre><code class="language-js">cd 到vcpkg安装目录
+# 如此前运行过`./vcpkg integrate install`，则无须再运行
 ./vcpkg integrate install
 ./vcpkg install assimp
 </code></pre>
-<h2 id="82vcpkgassimp">8.2.通过vcpkg安装assimp（按需）</h2>
-<p>如果需要使用<code>assimp</code>库，相信你已经知道怎么通过<code>vcpkg</code>来安装，并在<code>cmakelists</code>中配置使用了。</p>
-<p>请回顾上述内容，可参考下面的链接，如果有必要的话，
-<code>https://github.com/assimp/assimp/blob/master/Build.md</code></p>
+<p>请回顾上述内容，可参考下面的链接，如果有必要的话，</p>
+<p><code>https://github.com/assimp/assimp/blob/master/Build.md#install-on-all-platforms-using-vcpkg</code></p>
 
 <div id="disqus_thread"></div>
 <script>
