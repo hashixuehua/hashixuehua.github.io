@@ -367,7 +367,10 @@
 <h1 id="7camera">7.相机：<code>Camera</code>原理讲解</h1>
 <div class="admonition note">
 <p class="admonition-title">提示：</p>
-<p>在本文中作者采用了<code>glm</code>库相关的接口讲解，在课程代码中采用<code>QTMatrix</code>中类似的接口，但参数略有不同，详细可参照课程代码。</p>
+<ul>
+<li>在本文中作者采用了<code>glm</code>库相关的接口讲解，在课程代码中采用<code>QTMatrix</code>中类似的接口，但参数略有不同，详细可参照课程代码；</li>
+<li>作者在<code>视频课程</code>中对相机原理和实现有详细的讲解，包括原理和代码逻辑，欢迎观看。</li>
+</ul>
 </div>
 <h2 id="71">7.1.概述和原理</h2>
 <p>​在显示交互中，往往需要进行移动、缩放、旋转等操作，便于多方位查看图形元素，可以通过把场景中的所有物体往相反方向变换的方式来模拟出摄像机，产生一种视角在变换的感觉，而不是场景在变换。</p>
@@ -378,12 +381,12 @@
 <li>场景中实际是没有相机的，我们通过虚拟出相机及参数，实时构造出<code>viewMatrix</code>及投影矩阵（<code>ProjectionMatrix</code>）传递给渲染管线，从而不断的变换和处理场景物体坐标，产生一种（通过操纵相机）在场景中进行运动的效果。</li>
 </ul>
 </div>
-<p><img src="../img/cad/camera_axes.png" alt="观察空间示意" title="观察空间示意" width="300" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<p><img src="../img/cad/camera_axes.png" alt="观察空间示意" title="观察空间示意" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：观察空间示意</figcaption>
 
 <p>​定义一个摄像机，我们需要构造观察空间，包括观察位置、方向、右方向向量以及上方向向量。</p>
 <p>观察空间的范围有限，将观察坐标变换为裁剪坐标的投影矩阵可以为两种不同的形式：正射投影矩阵(Orthographic Projection Matrix)或一个透视投影矩阵(Perspective Projection Matrix)，每种形式都定义了不同的平截头体。</p>
-<p><img src="../img/cad/image-17.png" alt="透视投影示意" title="透视投影示意" width="300" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<p><img src="../img/cad/image-17.png" alt="透视投影示意" title="透视投影示意" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：透视投影示意</figcaption>
 
 <h2 id="72">7.2.缩放</h2>
@@ -398,7 +401,7 @@
 <p>具体可以通过监控鼠标右键移动或按键WASD触发来控制<code>cameraPos</code>的变化。</p>
 <h2 id="74">7.4.旋转</h2>
 <p>下图为欧拉角示意，一共有3种欧拉角：俯仰角(Pitch)、偏航角(Yaw)和滚转角(Roll)，对于我们的摄像机系统来说，我们只关心俯仰角和偏航角。</p>
-<p><img src="../img/cad/camera_pitch_yaw_roll.png" alt="欧拉角" title="欧拉角" width="300" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<p><img src="../img/cad/camera_pitch_yaw_roll.png" alt="欧拉角" title="欧拉角" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：欧拉角</figcaption>
 
 <p>给定一个俯仰角和偏航角，我们可以把它们转换为一个代表新的方向向量的3D向量。</p>
@@ -422,7 +425,7 @@ Up = glm::normalize(glm::cross(Right, Front));
 <p>在实际操作中，往往需要绕指定点进行旋转，如绕当前选中的元素或绕鼠标悬浮点进行旋转。</p>
 <p>和绕原点旋转类似，绕指定点<code>center</code>旋转的过程中，<code>cameraPos</code>与<code>center</code>距离保持一致，而由<code>cameraPos</code>指向<code>center</code>的向量<code>curFront</code>和对应的右向量<code>curRight</code>在不断的更新。</p>
 <p>容易求得<code>center</code>到<code>cameraPos</code>的向量，再叠加<code>center</code>即可得到更新后的<code>cameraPos</code>。</p>
-<p><img src="../img/cad/image-20230322224548010.png" alt="绕指定点旋转" title="绕指定点旋转" width="300" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<p><img src="../img/cad/image-20230322224548010.png" alt="绕指定点旋转" title="绕指定点旋转" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：绕指定点旋转</figcaption>
 
 <pre><code class="language-c++">glm::vec3 rPt(Position.x - center.x, Position.y - center.y, Position.z - center.z);
