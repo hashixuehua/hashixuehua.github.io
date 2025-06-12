@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/11%20add%20label%20of%20rotate%20center/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>11 添加旋转中心标识 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../10%20add%20view%20cube/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../12%20UI%20-%20add%20toolBar%20button/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#11">11.添加旋转中心标识</a></li>
+        
+            <li><a href="#111">11.1.概述</a></li>
+        
+            <li><a href="#112">11.2.添加世界坐标和屏幕坐标转换函数</a></li>
+        
+            <li><a href="#113">11.3.配置数据</a></li>
+        
+            <li><a href="#114">11.4.绘制函数</a></li>
+        
+            <li><a href="#115">11.5.在渲染循环中调用绘制</a></li>
+        
+            <li><a href="#116">11.6.效果</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="11">11.添加旋转中心标识</h1>
+<p>旋转是三维软件的基础交互功能，常常需要显示旋转中心标识以方便观察当前旋转中心位置。如当选中构件时旋转常常期望以构件（接触点或几何中心等）为中心进行旋转；无聚焦点时旋转又常常以场景中心为旋转中心。</p>
+<h2 id="111">11.1.概述</h2>
+<p>基于如下考虑，我们采用此前绘制viewCube的思路来绘制旋转中心，还能想起来吗？</p>
+<p>1) 构建原点为中心的数据；
+2) 个性化构建<code>viewMatrix</code>，如以固定的正视视角和距离观察旋转中心标识；
+3) 在经过<code>projectionMatrix</code>投影后（此时得到了标准化设备坐标）立即进行偏移：通过目标像素位置计算偏移距离，偏移到标准化设备坐标范围中对应位置；
+4) （默认处理）此后通过视口变换映射到屏幕上的像素位置，旋转中心标识正确显示到了对应像素位置。</p>
+<p>我们可能会有疑问，怎么样得到目标像素位置，怎么样计算偏移距离？带着疑问，我们继续学习。</p>
+<div class="admonition note">
+<p class="admonition-title">考虑因素：</p>
+<ul>
+<li>为保持更高的渲染效率，继续采用基于<code>VAO、VBO、EBO</code>的数据桥梁机制，先配置好数据，而后在渲染循环中绘制；</li>
+<li>考虑可维护性和扩展性，采用相同的机制绘制场景元素，如<code>viewCube</code>、<code>mouseRotateLabel</code>等；</li>
+</ul>
+</div>
+<h2 id="112">11.2.添加世界坐标和屏幕坐标转换函数</h2>
+<p>在此前的相机实现中，我们通过监控鼠标左键按住移动事件实现了场景旋转，其中我们判断了第一次按下时鼠标所在位置是否<code>接触</code>有效元素，并计算并记录接触位置的<code>场景坐标</code>赋值给<code>mousePos4Rotate</code>。</p>
+<div class="admonition note">
+<p class="admonition-title">提示：</p>
+<p>上述使用了<code>场景坐标</code>的名词，指的是当前Viewer场景中的坐标，即通过<code>y-up</code>转为GLViewer采用的<code>z-up</code>规则后的坐标。</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>我们发现<code>Camera</code>类中的<code>Screen2World</code>和<code>World2Screen</code>函数名不太准确，那就行动吧，分别更改为<code>Screen2Scene</code>和<code>Scene2Screen</code>。同时<code>GetWorldPos</code>函数实现有点问题，且并没有被使用，我们先注释它。</p>
+</div>
+<p>上述<code>mousePos4Rotate</code>是场景坐标，我们可以将其变换到屏幕坐标（像素位置），然后再进一步根据逆向的视口变换过程得到在标准化设备坐标范围中的偏移。</p>
+<pre><code class="language-c++">void ViewerUtils::worldToScreen(const QVector3D&amp; wcsPt, const QRect&amp; viewport_rect, bool considerModelTrans, const QMatrix4x4&amp; modelMat, const QMatrix4x4&amp; viewMat, const QMatrix4x4&amp; projectionMat, float&amp; px, float&amp; py, double&amp; depth)
+{
+    QVector4D ray_eye(wcsPt, 1.0);
+    if (considerModelTrans)
+        ray_eye = modelMat * ray_eye;
+    ray_eye = projectionMat * viewMat * ray_eye;
+
+    depth = ray_eye.z() / ray_eye.w();
+
+    px = (ray_eye.x() / ray_eye.w() + 1.f) / 2.f * viewport_rect.width();
+    py = (ray_eye.y() / ray_eye.w() - 1.0) / -2.f * viewport_rect.height();
+}
+</code></pre>
+<p>注意上述参数<code>bool considerModelTrans</code>，如果设为false则是将<code>场景坐标</code>转换为<code>屏幕坐标</code>，否则将<code>世界坐标</code>转换为<code>屏幕坐标</code>。</p>
+<p>另外，我们也定义了<code>screenToWord</code>函数，详见工程代码~</p>
+<h2 id="113">11.3.配置数据</h2>
+<p>我们参考<code>viewCube</code>数据的配置过程配置<code>旋转中心标识</code>数据，我们需要一个中心在原点的矩形面结合标识图片作为纹理来表达。</p>
+<pre><code class="language-c++">void Model::setupMouse()
+{
+    Vector3f pt0{ -2.f, -2.0f, 0.0f };
+    Vector3f pt1{ 2.f, -2.0f, 0.0f };
+    Vector3f pt2{ 2.0f, 2.f, 0.0f };
+    Vector3f pt3{ -2.0f, 2.f, 0.0f };
+
+    Vector3f nor0{ 0.0f, 0.0f, 1.0f };
+    Vector3f nor1{ 0.0f, 0.0f, 1.0f };
+    Vector3f nor2{ 0.0f, 0.0f, 1.0f };
+    Vector3f nor3{ 0.0f, 0.0f, 1.0f };
+
+    Face face;
+    face.outerLoop.lstLine.push_back(Line{ pt0, pt1 });
+    face.outerLoop.lstLine.push_back(Line{ pt1, pt2 });
+    face.outerLoop.lstLine.push_back(Line{ pt2, pt3 });
+    face.outerLoop.lstLine.push_back(Line{ pt3, pt0 });
+
+    TriangleMesh cMesh;
+    CGUtils::TesslateFace(face, cMesh);
+
+    vector&lt;Vector2f&gt; lstUvs;
+    lstUvs.push_back(Vector2f(0.0, 0.0));
+    lstUvs.push_back(Vector2f(1.0, 0.0));
+    lstUvs.push_back(Vector2f(1.0, 1.0));
+    lstUvs.push_back(Vector2f(0.0, 1.0));
+    cMesh.SetUVs(lstUvs.size(), &amp;lstUvs[0].U);
+
+    auto mesh = ConvertMesh(cMesh);
+    mapName2VMesh.insert(make_pair(ViewerCache::mouseLabel, MeshInfo(mesh, Vector3W(1.0f, 1.0f, 1.0f, 1.0f))));
+}
+</code></pre>
+<p>像此前的处理一样，我们把配置好的mesh添加到<code>mapName2VMesh</code>中，便于之后在渲染循环中进行绘制。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>记得把纹理图片添加到<code>glviewer.qrc</code>中哦，否则项目识别不到资源；
+你也可以使用自己的图片创造不一样的效果。</p>
+</div>
+<p><img src="../img/cad/rotateLabel.png" alt="鼠标旋转中心标识图标" width="100" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：鼠标旋转中心标识图标</figcaption>
+
+<p>嘿嘿，上面的标识图片使用了<code>CGLib</code>库的计算紧密外围轮廓的函数并将紧密外轮廓绘制到了图片上（亮显的外轮廓）。</p>
+<h2 id="114">11.4.绘制函数</h2>
+<p>由于这些<code>场景元素</code>的绘制过程是大致一样的，我们进行抽象和重构，</p>
+<pre><code class="language-c++">void Model::DrawViewElement(QOpenGLShaderProgram&amp; shader, const string&amp; name)
+{
+    auto itrFind = mapName2VMesh.find(name);
+    if (itrFind == mapName2VMesh.end())
+        return;
+
+    auto&amp; viewCube = itrFind-&gt;second;
+
+    string imagePath = &quot;&quot;;
+    if (name == ViewerCache::viewCube)
+        imagePath = &quot;:/viewcube.png&quot;;
+    else if (name == ViewerCache::mouseLabel)
+        imagePath = &quot;:/rotateLabel.png&quot;;
+    else
+        throw exception(&quot;can not get valid image path.&quot;);
+
+    auto textTexture = ViewerUtils::getOrCreateImageTexture(imagePath.c_str());
+    textTexture-&gt;bind(0);
+
+    shader.setUniformValue(&quot;texture_diffuse1&quot;, 0);
+
+    //  viewCube
+    shader.setUniformValue(&quot;objectColor&quot;, viewCube.color.GetWX(), viewCube.color.GetWY(), viewCube.color.GetWZ(), viewCube.color.GetW());
+    viewCube.current-&gt;Draw(shader);
+
+    textTexture-&gt;release();
+}
+</code></pre>
+<p>后续其他场景元素也可采用类似的机制和过程，如<code>鼠标捕捉标识</code>、<code>坐标系标识</code>等。</p>
+<h2 id="115">11.5.在渲染循环中调用绘制</h2>
+<p>通过此前课程我们知道<code>OpenGL</code>是一个状态机，其中的渲染管线也是，参考杉树<code>viewCube</code>的配置过程，我们需要对渲染管线的几个关键环节进行<code>状态配置</code>。</p>
+<ol>
+<li>通过固定的正视视角和距离构造观察矩阵<code>GetViewMatrix4MouseLabel</code>；</li>
+<li>将场景坐标<code>mousePos4Rotate</code>转换为屏幕坐标<code>mousePX</code>和<code>mousePY</code>；</li>
+<li>经过逆向视口变换将屏幕坐标映射为标准化设备坐标范围的位置（也即偏移，因为<code>旋转中心标识</code>数据在其原点位置），在投影后立即进行此偏移；</li>
+<li>注意此处点光源位置设置为视角方向，目的是让<code>旋转中心标识</code>拥有明亮的显示效果，毕竟是便于观察嘛；</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">提示：</p>
+<p>尽量使<code>场景元素</code>的深度值小(通过缩小元素尺寸+将观察点设置很近)，便于一直绘制，且不被遮挡；试想一下，<code>场景元素</code>距离透视平截头体的近平面很近，深度值自然就很小；
+当然也可以在片段着色器中更改<code>场景元素</code>的深度来达到同样目的，那样修改会更多些；</p>
+</div>
+<pre><code class="language-c++">//  mouse
+float mousePX, mousePY;
+double mouseDepth;
+ViewerUtils::worldToScreen(m_camera.mousePos4Rotate, { 0, 0, m_camera.SCR_WIDTH, m_camera.SCR_HEIGHT }, false, m_modelMatrix, m_viewMat, m_projectionMat, mousePX, mousePY, mouseDepth);
+float pt_x = ((float)mousePX / m_camera.SCR_WIDTH) * 2.f - 1.f;
+float pt_y = -((float)mousePY / m_camera.SCR_HEIGHT) * 2.f + 1.f;
+QMatrix4x4 offMouseLabel;
+offMouseLabel.translate(QVector3D(pt_x, pt_y, 0.0));
+
+m_projection4ViewCube.setToIdentity();
+m_projection4ViewCube.perspective(45.0f, (float)m_camera.SCR_WIDTH / (float)m_camera.SCR_HEIGHT, 0.1f, 100.0f);
+
+QMatrix4x4 modelMouse;
+modelMouse.translate(m_camera.mousePos4Rotate);
+m_textureShader.setUniformValue(&quot;lightColor&quot;, QVector3D(1.0f, 1.0f, 1.0f));
+m_textureShader.setUniformValue(&quot;lightPos&quot;, QVector3D(0.f, 1.f, 0.f));
+m_textureShader.setUniformValue(&quot;projection&quot;, offMouseLabel * m_projection4ViewCube);
+m_textureShader.setUniformValue(&quot;view&quot;, m_camera.GetViewMatrix4MouseLabel());
+m_textureShader.setUniformValue(&quot;model&quot;, m_modelMatrix);
+m_model-&gt;DrawViewElement(m_textureShader, ViewerCache::mouseLabel);
+</code></pre>
+<h2 id="116">11.6.效果</h2>
+<p>如果一切正常，或者遇到的问题被排查解决，那么运行后可以看到如下效果。</p>
+<p><img src="../img/cad/image-32.png" alt="鼠标旋转中心标识效果" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：鼠标旋转中心标识效果</figcaption>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/03%20about%20OpenGL/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>03 关于OpenGL - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../02%20hello%20Widget/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../04%20hello%20Triangle/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#3opengl">3.关于OpenGL</a></li>
+        
+            <li><a href="#31">3.1.渲染管线</a></li>
+        
+            <li><a href="#32">3.2.数据与渲染的桥梁</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="3opengl">3.关于OpenGL</h1>
+<p>一般认为OpenGL是API(Application Programming Interface, 应用程序编程接口)，包含了一系列可以操作图形、图像的函数。实际，OpenGL本身是一个由Khronos组织制定并维护的规范(Specification)。所有版本的OpenGL规范文档都被公开的寄存在Khronos那里。</p>
+<p>早期的OpenGL使用立即渲染模式（Immediate mode，也就是固定渲染管线），这个模式下绘制图形很方便，但控制和使用不够灵活自由，同时效率较低。</p>
+<p>从OpenGL3.2开始，规范文档开始废弃立即渲染模式，并鼓励开发者在OpenGL的核心模式(Core-profile)下进行开发，这个分支的规范完全移除了旧的特性。现代函数要求使用者真正理解OpenGL和图形编程，它有一些难度，然而提供了更多的灵活性，更高的效率，更重要的是可以更深入的理解图形编程。</p>
+<p>OpenGL自身是一个巨大的状态机(State Machine)，一系列变量控制的状态构成OpenGL上下文(Context)，当前OpenGL上下文控制如何进行渲染。</p>
+<p>OpenGL库是用C语言写的，同时也支持多种语言的派生，但其内核仍是一个C库。由于C的一些语言结构不易被翻译到其它的高级语言，因此OpenGL开发的时候引入了一些抽象层。“对象(Object)”就是其中一个。</p>
+<h2 id="31">3.1.渲染管线</h2>
+<p>经过渲染管线的处理，可将3D空间中的元素转换为可用于屏幕渲染的2D像素组。图形渲染管线可以被划分为两个主要部分：第一部分把你的3D坐标转换为2D坐标，第二部分是把2D坐标转变为实际的有颜色的像素。</p>
+<p>渲染管线的运行依托于每个阶段对应的“着色器”，这些着色器运行于GPU上，可基于GPU成千上万的处理核心快速的运行，处理数据。</p>
+<p>OpenGL着色器是用OpenGL着色器语言(OpenGL Shading Language, GLSL)写成的。</p>
+<p><img src="../img/cad/1745210355179.jpg" alt="渲染管线" title="渲染管线" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：渲染管线（图源：https://learnopengl.com/）</figcaption>
+
+<ul>
+<li>顶点着色器(Vertex Shader)
+对输入的顶点进行处理，把3D坐标转为投影于观察方向的3D坐标（<code>裁剪坐标</code>），同时顶点着色器允许我们对顶点属性进行一些基本处理，如Normal、UV等。</li>
+</ul>
+<pre><code class="language-C++">#version 450 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+
+//在片段着色器中与光源方位结合，构造片段对应的“漫反射”（diffuse）数据
+out vec3 FragPos;
+out vec3 Normal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    Normal = vec3(model * vec4(aNormal, 0.0));
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+}
+</code></pre>
+<ul>
+<li>
+<p>几何着色器(Geometry Shader)
+将一组顶点作为输入，这些顶点形成图元，并且能够通过发出新的顶点来形成新的(或其他)图元来生成其他形状。</p>
+</li>
+<li>
+<p>图元装配(Primitive Assembly)阶段
+将顶点着色器（或几何着色器）输出的所有顶点作为输入（如果是GL_POINTS，那么就是一个顶点），并将所有的点装配成指定图元的形状</p>
+</li>
+<li>
+<p>光栅化阶段(Rasterization Stage)
+这里它会把图元映射为最终屏幕上相应的像素，生成供片段着色器(Fragment Shader)使用的片段(Fragment)。在片段着色器运行之前会执行裁切(Clipping)</p>
+</li>
+<li>
+<p>片段着色器(Fragment Shader)
+主要目的是计算一个像素的最终颜色，这也是所有OpenGL高级效果产生的地方。通常，片段着色器包含3D场景的数据（比如光照、阴影、光的颜色等等），这些数据可以被用来计算最终像素的颜色。</p>
+</li>
+</ul>
+<pre><code class="language-C++">#version 450 core
+out vec4 FragColor;
+
+in vec3 Normal;  
+in vec3 FragPos;  
+
+uniform vec3 lightPos; 
+uniform vec3 lightColor;
+uniform vec4 objectColor;
+
+void main()
+{    
+    // ambient
+    float ambientStrength = 0.3;
+    vec3 ambient = ambientStrength * lightColor;
+
+    // diffuse 
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightColor;
+
+    vec3 result = (ambient + diffuse) * objectColor.rgb;
+    FragColor = vec4(result, objectColor.a);
+}
+</code></pre>
+<ul>
+<li>Alpha测试和混合(Blending)阶段
+这个阶段检测片段的对应的深度（和模板(Stencil)）值（后面会讲），用它们来判断这个像素是其它物体的前面还是后面，决定是否应该丢弃。这个阶段也会检查alpha值（alpha值定义了一个物体的透明度）并对物体进行混合(Blend)。所以，即使在片段着色器中计算出来了一个像素输出的颜色，在渲染多个三角形的时候最后的像素颜色也可能完全不同。</li>
+</ul>
+<p>图形渲染管线非常复杂，它包含很多可配置的部分。然而，对于大多数场合，我们只需要配置顶点和片段着色器就行了。几何着色器是可选的，通常使用它默认的着色器就行了。</p>
+<h2 id="32">3.2.数据与渲染的桥梁</h2>
+<p>我们怎么样把数据传递给渲染管线呢？可以通过构建和配置<code>VAO、VBO、EBO</code>的方式，将数据以一定的结构和意义进行绑定和解释，这样在渲染管线中可以很方便的去使用和渲染绘制。</p>
+<p><code>VAO、VBO、EBO</code>可以称之为<strong>数据与渲染的桥梁</strong>，构建和配置的过程也即桥梁搭建。</p>
+<ul>
+<li>顶点数组对象：<code>Vertex Array Object，VAO</code>；</li>
+<li>顶点缓冲对象：<code>Vertex Buffer Object，VBO</code>；</li>
+<li>元素缓冲对象：<code>Element Buffer Object，EBO</code> 或 索引缓冲对象 <code>Index Buffer Object，IBO</code>。</li>
+</ul>
+<p><img src="../img/cad/1745212145944.jpg" alt="VBO,VAO,and EBO" title="VBO,VAO,and EBO" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：VBO,VAO,and EBO（图源：https://learnopengl.com/）</figcaption>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

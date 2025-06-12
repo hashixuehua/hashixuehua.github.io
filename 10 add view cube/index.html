@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/10%20add%20view%20cube/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>10 添加视图立方体 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../09%20draw%20default%20work%20plane/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../11%20add%20label%20of%20rotate%20center/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#10viewcube">10.添加视图立方体（ViewCube）</a></li>
+        
+            <li><a href="#101shader">10.1.引入处理纹理的shader</a></li>
+        
+            <li><a href="#102">10.2.纹理图片</a></li>
+        
+            <li><a href="#103viewcube">10.3.绘制viewCube</a></li>
+        
+            <li><a href="#104">10.4.在渲染循环中调用绘制</a></li>
+        
+            <li><a href="#105">10.5.效果</a></li>
+        
+            <li><a href="#106viewcube">10.6.通过viewCube切换视图</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="10viewcube">10.添加视图立方体（ViewCube）</h1>
+<p>视图立方体（<code>ViewCube</code>）能够与当前视角联动展示，可以方便的看出当前视角方位，同时也可以通过<code>ViewCube</code>的交互快速的切换到对应视图，如俯视图。</p>
+<p>本节课程我们一起来创建<code>ViewCube</code>并把它加入到<code>Viewer</code>中。</p>
+<h2 id="101shader">10.1.引入处理纹理的shader</h2>
+<p>在<code>src/shader</code>目录下新建顶点着色器和片段着色器shader文件，</p>
+<p>文件&rdquo;1.model_loading_texture.vert&rdquo;：</p>
+<pre><code class="language-c">#version 450 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+layout (location = 2) in vec2 aTexCoords;
+
+out vec2 TexCoords;
+out vec3 FragPos;
+out vec3 Normal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main()
+{
+    FragPos = vec3(model * vec4(aPos, 1.0));
+    Normal = vec3(model * vec4(aNormal, 0.0));
+    TexCoords = aTexCoords;    
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+}
+</code></pre>
+<p>文件&rdquo;1.model_loading_texture.frag&rdquo;：</p>
+<pre><code class="language-c">#version 450 core
+out vec4 FragColor;
+
+in vec2 TexCoords;
+in vec3 Normal;  
+in vec3 FragPos;  
+
+uniform int sampleTexture = 1;
+uniform sampler2D texture_diffuse1;
+uniform vec3 lightPos; 
+uniform vec3 lightColor;
+uniform vec4 objectColor;
+
+void main()
+{
+    // ambient
+    float ambientStrength = 0.3;
+    vec3 ambient = ambientStrength * lightColor;
+
+    // diffuse 
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * lightColor;
+
+    vec3 result = (ambient + diffuse) * objectColor.rgb;
+
+  if (sampleTexture == 1)
+  {
+        //FragColor = vec4(result, 0.3);
+        //FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);//texture(texture_diffuse1, TexCoords);
+
+      vec4 sampled = vec4(1.0, 1.0, 1.0, texture(texture_diffuse1, TexCoords).r);
+        //FragColor = vec4(result, 1.0) * sampled;
+
+      FragColor = texture(texture_diffuse1, TexCoords) * vec4(result, 1.0);
+      //FragColor = texture(texture_diffuse1, TexCoords);
+  }
+  else
+  {
+        FragColor = vec4(result, objectColor.a);
+  }
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">提示：</p>
+<p>别忘了把新创建的shader文件加入到<code>shaders.qrc</code>中，以便项目能够正常包含并使用资源。</p>
+</div>
+<pre><code class="language-js">&lt;RCC&gt;
+    &lt;qresource prefix=&quot;/&quot;&gt;
+    &lt;file&gt;shader/1.model_loading.frag&lt;/file&gt;
+        &lt;file&gt;shader/1.model_loading.vert&lt;/file&gt;
+    &lt;file&gt;shader/1.model_loading_texture.frag&lt;/file&gt;
+        &lt;file&gt;shader/1.model_loading_texture.vert&lt;/file&gt;
+    &lt;/qresource&gt;
+&lt;/RCC&gt;
+</code></pre>
+<pre><code class="language-c++">void initTextureShader(QOpenGLShaderProgram&amp; shader)
+{
+    bool result = true;
+    result = shader.addShaderFromSourceFile(QOpenGLShader::Vertex, &quot;:/shader/1.model_loading_texture.vert&quot;);
+    if (!result) {
+        qDebug() &lt;&lt; shader.log();
+    }
+    result = shader.addShaderFromSourceFile(QOpenGLShader::Fragment, &quot;:/shader/1.model_loading_texture.frag&quot;);
+    if (!result) {
+        qDebug() &lt;&lt; shader.log();
+    }
+    result = shader.link();
+    if (!result) {
+        qDebug() &lt;&lt; shader.log();
+    }
+}
+</code></pre>
+<h2 id="102">10.2.纹理图片</h2>
+<p>我们在根<code>cmakelists</code>同级目录中创建<code>resources</code>文件夹，并把如下图片文件放进去，同时在<code>resources</code>中创建<code>glviewer.qrc</code>资源文件，将<code>viewcube.png</code>更新进去。</p>
+<p><img src="../img/cad/viewcube.png" alt="viewcube.png" width="200" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：viewcube.png</figcaption>
+
+<pre><code class="language-js">&lt;RCC&gt;
+    &lt;qresource prefix=&quot;/&quot;&gt;
+    &lt;file&gt;viewcube.png&lt;/file&gt;
+    &lt;/qresource&gt;
+&lt;/RCC&gt;
+</code></pre>
+<p>由于上述<code>glviewer.qrc</code>不在根cmakelists所在目录，我们需要把它添加到cmakelists中，以便项目能够正常包含并使用。</p>
+<p><img src="../img/cad/image-28.png" alt="将glviewer.qrc添加到cmakelists中" width="500" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：将glviewer.qrc添加到cmakelists中</figcaption>
+
+<p>此时，可以在项目中使用<code>viewcube.png</code>了。</p>
+<h2 id="103viewcube">10.3.绘制viewCube</h2>
+<p>回顾以下上节<code>workPlane</code>的绘制步骤，还记得吗？先<code>setup</code>，然后<code>draw</code>，是的，<code>viewCube</code>也是如此。</p>
+<pre><code class="language-c++">void Model::setupViewCube()
+{
+    vector&lt;Vector3f&gt; cubeVerts(4);
+    CGLibUtils::getRectSection(Vector3f::Zero, Vector3f::BasicZ, 50.0f, -50.0f, &amp;cubeVerts[0]);
+
+    Body cube;
+    CGUtils::GenerateCube(cubeVerts, Vector3f::BasicZ, 100.0f, cube);
+
+    TriangleMesh cubeMesh;
+    CGUtils::TessellateBody(cube, cubeMesh);
+
+    //uv
+    vector&lt;Vector2f&gt; lstUvs;
+    lstUvs.push_back(Vector2f(0.0, 1.0));
+    lstUvs.push_back(Vector2f(0.5, 1.0));
+    lstUvs.push_back(Vector2f(0.5, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.0, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(1.0, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(1.0, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 1.0));
+    lstUvs.push_back(Vector2f(1.0, 1.0));
+    lstUvs.push_back(Vector2f(1.0, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.0, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 2.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.0, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(1.0, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(1.0, 0.0));
+    lstUvs.push_back(Vector2f(0.5, 0.0));
+    lstUvs.push_back(Vector2f(0.0, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 1.0 / 3.0));
+    lstUvs.push_back(Vector2f(0.5, 0.0));
+    lstUvs.push_back(Vector2f(0.0, 0.0));
+    cubeMesh.SetUVs(lstUvs.size(), &amp;lstUvs[0].U);
+
+    auto mesh = ConvertMesh(cubeMesh);
+    mapName2VBody.insert(make_pair(ViewerCache::viewCube, BodyInfo(cube, cubeMesh)));
+    mapName2VMesh.insert(make_pair(ViewerCache::viewCube, MeshInfo(mesh, Vector3W(1.0f, 1.0f, 1.0f, 1.0f))));
+}
+</code></pre>
+<p>我们根据尺寸数据获取矩形截面，然后创建拉伸体，继而得到mesh，然后为mesh中的顶点添加<code>uv</code>属性，以便上述<code>viewcube.png</code>能够正确的贴到mesh上。
+最后，我们将viewCube对应的mesh和body添加到了map中，其中在绘制时需要用到mesh，在点击viewCube以便切换到对应试图时需要使用body进行点击判断，后续内容会讲解到。</p>
+<p>细心的你注意到了，<code>uv</code>坐标并不是随意设置的。是的，我们所使用的贴图中包含6个面的纹理，将图片对应纹理部分正确的贴合到mesh的6个面上，由于图片整体对应的uv是(0,0)~(1,1)，
+所以每个面的4个顶点的<code>uv</code>需要与对应图片部分映射，感兴趣的同学可以自行将上述mesh<code>展开</code>来模拟映射过程，检验uv属性数据。</p>
+<p>然后，我们来绘制，</p>
+<pre><code class="language-c++">void Model::DrawViewCube(QOpenGLShaderProgram&amp; shader)
+{
+    auto itrFind = mapName2VMesh.find(ViewerCache::viewCube);
+    if (itrFind == mapName2VMesh.end())
+        return;
+
+    auto&amp; viewCube = itrFind-&gt;second;
+
+    auto textTexture = ViewerUtils::getOrCreateImageTexture(&quot;:/viewcube.png&quot;);
+    textTexture-&gt;bind(0);
+
+    shader.setUniformValue(&quot;texture_diffuse1&quot;, 0);
+
+    //  viewCube
+    shader.setUniformValue(&quot;objectColor&quot;, viewCube.color.GetWX(), viewCube.color.GetWY(), viewCube.color.GetWZ(), viewCube.color.GetW());
+    viewCube.current-&gt;Draw(shader);
+
+    textTexture-&gt;release();
+}
+</code></pre>
+<p>这个过程熟悉吗？</p>
+<h2 id="104">10.4.在渲染循环中调用绘制</h2>
+<p>上述我们得到的mesh是中心在原点，长宽高均为50的立方体，我们怎么把它放到三维场景的右上角呢？在视角变动的过程中怎么样让它的中心固定呢？</p>
+<p>这需要我们回顾渲染管线章节部分内容，局部坐标-（<code>modelMatrix</code>）-&gt;世界坐标-（<code>viewMatrix</code>）-&gt;观察空间-(<code>projectionMatrix</code>)-&gt;裁剪空间，之后经过透视除法变换到[-1,1]空间范围，然后通过视口变换映射到屏幕上的像素范围（如800*600）。</p>
+<p>我们采用如下策略来处理viewCube：</p>
+<ol>
+<li>转换为世界坐标，通过<code>modelMatrix</code>；</li>
+<li>使用camera的Front向量构造<code>viewMatrix</code>，具体的是从原点逆向Front偏移一定距离，然后看向原点（也就是viewCube的中心）构造<code>viewMatrix</code>；</li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>想象一下，这样在视角旋转等变换过程中，viewCube一直以原点为中心点同步转动！
+怎么样将viewCube的中心固定到屏幕固定位置（如右上角）呢？我们知道，之后会通过<code>projectionMatrix</code>投影到裁剪空间，在此过程中我们能做点什么吗？</p>
+</div>
+<ol start="3">
+<li>我们正常构造<code>projectionMatrix</code>，投影后随即叠加一个偏移，将裁剪坐标偏移（如<code>(0.85,0.7)</code>）到屏幕右上角；</li>
+</ol>
+<p><img src="../img/cad/image-30.png" alt="投影后再偏移" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：投影后再偏移</figcaption>
+
+<p>至此，<code>viewCube</code>会随着视角的转动而同步的以屏幕固定位置为中心转动，其大小和中心不变。</p>
+<p>我们来看在<code>paintGL</code>函数中的实现：</p>
+<pre><code class="language-c++">//  for view cube
+m_projection4ViewCube.setToIdentity();
+m_projection4ViewCube.perspective(45.0f, (float)m_camera.SCR_WIDTH / (float)m_camera.SCR_HEIGHT, 0.1f, 100.0f);
+
+// view cube
+QMatrix4x4 viewMatNoTrans = m_camera.GetViewMatrix4VieweCube();
+
+QMatrix4x4 offViewCube;
+getViewCubeProjectOffset(offViewCube);
+
+QVector3D posLtCube = (-10 * m_camera.Front);
+QVector4D lightCube = /*m_modelMatrix.inverted() **/ QVector4D(posLtCube.x(), posLtCube.y(), posLtCube.z(), 1.0);
+m_textureShader.bind();
+m_textureShader.setUniformValue(&quot;lightColor&quot;, QVector3D(1.0f, 1.0f, 1.0f));
+m_textureShader.setUniformValue(&quot;lightPos&quot;, lightCube.toVector3D());
+m_textureShader.setUniformValue(&quot;projection&quot;, offViewCube * m_projection4ViewCube);
+m_textureShader.setUniformValue(&quot;view&quot;, viewMatNoTrans);
+m_textureShader.setUniformValue(&quot;model&quot;, m_modelMatrix);
+
+m_model-&gt;DrawViewCube(m_textureShader);
+
+//qDebug() &lt;&lt; m_textureShader.log();
+m_textureShader.release();
+</code></pre>
+<h2 id="105">10.5.效果</h2>
+<p>如果一切正常，或者遇到的问题被排查解决，那么运行后可以看到如下效果。</p>
+<p><img src="../img/cad/image-29.png" alt="viewCube效果" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：viewCube效果</figcaption>
+
+<h2 id="106viewcube">10.6.通过viewCube切换视图</h2>
+<h3 id="1061">10.6.1.监控鼠标事件</h3>
+<p>我们在<code>event</code>函数中添加如下实现监控鼠标左键点击事件，</p>
+<pre><code class="language-c++">if (e-&gt;type() == QEvent::MouseButtonPress)
+{
+    auto event = static_cast&lt;QMouseEvent*&gt;(e);
+    if (event-&gt;button() == Qt::LeftButton)
+    {
+        onMouseLeftPress(event);
+    }
+}
+</code></pre>
+<p>通过点击的像素点判断是否点中了<code>viewCube</code>以及点击的是哪个面，然后调用此前Camera类对象的<code>FitView</code>函数切换到对应视图。</p>
+<pre><code class="language-c++">void GLView::onMouseLeftPress(QMouseEvent* event)
+{
+    //  check if clicked the view cube
+    int flag = ClickedViewCube(event-&gt;x(), event-&gt;y());
+    if (flag != -1)
+    {
+        m_camera.FitView(flag);
+        return;
+    }
+}
+</code></pre>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>由于我们缓存的viewCube对应的Body是绕原点同步转动的，所以我们需要对鼠标点击得到的像素位置进行渲染管线的逆向变换，然后构造射线再与Body进行射线相交判断。
+怎么逆向呢？回顾一下上文中我们再8.4节中提到的处理过程~</p>
+</div>
+<pre><code class="language-c++">float xStio, yStio;
+getViewCubeProjectOffsetStio(xStio, yStio);
+
+px = px - m_camera.SCR_WIDTH * 0.5 * xStio;
+py = py + m_camera.SCR_HEIGHT * 0.5 * yStio;
+
+QVector3D rayOri4VCube, rayEnd4VCube;
+QVector3D cmrPos4VCube = m_camera.GetCameraPos4ViewCube();
+ViewerUtils::getPickRay(px, py, { 0, 0, m_camera.SCR_WIDTH, m_camera.SCR_HEIGHT }, cmrPos4VCube/*m_camera.Position*/, m_modelMatrix.inverted(), m_camera.GetViewMatrix4VieweCube().inverted(), m_projectionMat.inverted(), rayOri4VCube, rayEnd4VCube);
+
+//  射线相交判断......
+</code></pre>
+<p>好啦，如果一切正常，或者遇到的问题被排查解决，那么运行后可以看到如下效果，如果有问题请参考本节对应工程代码。</p>
+<p><img src="../img/cad/image-31.png" alt="通过viewCube切换到俯视图" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：通过viewCube切换到俯视图</figcaption>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
