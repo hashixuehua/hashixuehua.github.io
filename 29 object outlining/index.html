@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/29%20object%20outlining/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>29 外轮廓效果 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">高级效果</a>
+    <ul class="dropdown-menu">
+        
+            
+<li class="active">
+    <a href="./">29 外轮廓效果</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../28%20other%20matters/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../code_repo/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#29">29.外轮廓效果</a></li>
+        
+            <li><a href="#291">29.1.模板缓冲概念</a></li>
+        
+            <li><a href="#292">29.2.相关接口</a></li>
+        
+            <li><a href="#293">29.3.外轮廓效果实现</a></li>
+        
+            <li><a href="#294">29.4.关键代码</a></li>
+        
+            <li><a href="#295">29.5.效果</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="29">29.外轮廓效果</h1>
+<p>在一些场景下需要绘制出组件的<code>外轮廓效果</code>以进行凸显提示，如在场景中重点突出部分组件吸引关注、凸显被选择组件等。
+外轮廓效果是三维软件的基础功能之一，可以使用<code>模板缓冲</code>机制来实现。</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>注意此处的<code>外轮廓效果</code>和此前的<code>轮廓线</code>是不同的概念，这里的外轮廓效果是为了凸显组件外围轮廓效果的渲染效果，不属于组件固有的几何信息数据。</p>
+</div>
+<p><img src="../img/cad/image-outlinning.png" alt="外轮廓效果" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：外轮廓效果</figcaption>
+
+<h2 id="291">29.1.模板缓冲概念</h2>
+<p><code>模板测试(Stencil Test)</code>运行于<code>深度测试</code>之前，<code>模板测试</code>通过的片段会执行<code>深度测试</code>，那么什么时候执行<code>模板测试</code>呢？</p>
+<p>在<code>片段着色器</code>中处理了片段之后，即进入<code>模板测试</code>阶段，根据<code>模板缓冲(Stencil Buffer)，</code>来决定是否丢弃对应片段，而我们可以通过控制<code>模板测试</code>阶段来获得一些有趣的效果，包括本章的主题-<code>外轮廓效果</code>。</p>
+<div class="admonition note">
+<p class="admonition-title">补充</p>
+<ul>
+<li>一般来说，<code>模板缓冲</code>中每个<code>模板值(Stencil Value)</code>是<code>8位</code>的，所以每个像素/片段可有<code>2^8</code>即<code>256</code>种不同的模板值；</li>
+<li>我们可以通过设置片段的模板值，之后通过模板值的比对来决定丢弃或是保留对应的片段。</li>
+</ul>
+</div>
+<p><img src="../img/cad/image-step of testing.png" alt="模板测试和深度测试过程" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：模板测试和深度测试过程</figcaption>
+
+<h2 id="292">29.2.相关接口</h2>
+<p>1) 启用模板测试，</p>
+<pre><code class="language-c++">glEnable(GL_STENCIL_TEST);
+</code></pre>
+<p>2) 清理模板缓冲</p>
+<p>下述代码包括清理颜色缓冲、深度缓冲和模板缓冲，</p>
+<pre><code class="language-c++">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+</code></pre>
+<p>3) 设置模板掩码</p>
+<ul>
+<li>和深度测试的<code>glDepthMask</code>函数类似，可以通过<code>glStencilMask</code>设置一个模板位掩码(Bitmask)，在写入缓冲的模板值前与该掩码进行<code>与(AND)</code>运算；</li>
+<li>默认情况下设置的位掩码所有位都为<code>1</code>，不影响输出；但如果将它设置为<code>0x00</code>，写入缓冲的所有模板值最后都会变成<code>0</code>，这与深度测试中的<code>glDepthMask(GL_FALSE)</code>是等价的。</li>
+</ul>
+<pre><code class="language-c++">glStencilMask(0xFF); // 将模板值原样写入模板缓冲
+glStencilMask(0x00); // 将模板值处理为0后写入模板缓冲（禁用写入）
+</code></pre>
+<p>4) 模板函数</p>
+<p>可以通过<code>模板函数</code>来影响<code>模板缓冲</code>的测试，也就是控制<code>模板测试</code>过程，模板函数包括<code>glStencilFunc</code>和<code>glStencilOp</code>。</p>
+<p>其中<code>glStencilFunc</code>决定是否通过模板测试，根据参数的不同可能会依据对应的模板值与参考值进行比较测试；而<code>glStencilOp</code>则根据模板测试结果决定对当前的模板值进行怎样的更新。</p>
+<pre><code class="language-c++">glStencilFunc(GLenum func, GLint ref, GLuint mask)
+</code></pre>
+<ul>
+<li><code>func</code>：设置模板测试函数(Stencil Test Function)，该测试函数决定如何将模板缓冲中的模板值和第二个函数参数<code>ref</code>值星星测试比较。可用的选项有<code>GL_NEVER</code>、<code>GL_LESS</code>、<code>GL_LEQUAL</code>、<code>GL_GREATER</code>、<code>GL_GEQUAL</code>、<code>GL_EQUAL</code>、<code>GL_NOTEQUAL</code>和<code>GL_ALWAYS</code>；</li>
+<li><code>ref</code>：设置了模板测试的参考值(Reference Value)，模板缓冲中的模板值将会与这个值进行测试比较；</li>
+<li><code>mask</code>：设置一个掩码，模板值会与该掩码进行与(AND)运算，之后再与参考值<code>ref</code>进行测试比较。初始情况下所有位都为1。</li>
+</ul>
+<pre><code class="language-c++">glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass)
+</code></pre>
+<ul>
+<li><code>sfail</code>：模板测试失败时采取的行为；</li>
+<li><code>dpfail</code>：模板测试通过，但深度测试失败时采取的行为；</li>
+<li><code>dppass</code>：模板测试和深度测试都通过时采取的行为。</li>
+</ul>
+<p>上述参数可选项如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GL_KEEP</td>
+<td>保持当前储存的模板值</td>
+</tr>
+<tr>
+<td>GL_ZERO</td>
+<td>将模板值设置为0</td>
+</tr>
+<tr>
+<td>GL_REPLACE</td>
+<td>将模板值设置为<fun>glStencilFunc</fun>函数设置的<code>ref</code>值</td>
+</tr>
+<tr>
+<td>GL_INCR</td>
+<td>如果模板值小于最大值则将模板值加1</td>
+</tr>
+<tr>
+<td>GL_INCR_WRAP</td>
+<td>与<var>GL_INCR</var>一样，但如果模板值超过了最大值则归零</td>
+</tr>
+<tr>
+<td>GL_DECR</td>
+<td>如果模板值大于最小值则将模板值减1</td>
+</tr>
+<tr>
+<td>GL_DECR_WRAP</td>
+<td>与<var>GL_DECR</var>一样，但如果模板值小于0则将其设置为最大值</td>
+</tr>
+<tr>
+<td>GL_INVERT</td>
+<td>按位翻转当前的模板缓冲值</td>
+</tr>
+</tbody>
+</table>
+<p>默认情况下<code>glStencilOp</code>是设置为<code>(GL_KEEP, GL_KEEP, GL_KEEP)</code>的，不论任何测试的结果如何，都不会更新模板缓冲中的值。但我们可以通过控制这些参数来控制模板缓冲中的模板值的更新，进而影响后续的模板测试过程。</p>
+<div class="admonition note">
+<p class="admonition-title">提示</p>
+<p>通过使用<code>glStencilFunc</code>和<code>glStencilOp</code>，我们可以通过灵活的控制模板测试和模板缓冲的更新行为，以获取一些有趣的渲染效果。</p>
+</div>
+<h2 id="293">29.3.外轮廓效果实现</h2>
+<p>通过上述知识的学习，我们了解了可以灵活的控制模板测试过程和模板值更新过程，现在我们想显示选中组件的外轮廓效果，让我们来活学活用吧~</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>我们正常绘制所有组件，包括选中的组件；</li>
+<li>我们再“绘制”一遍选中的组件以输出这些片段对应的模板值，有几个注意事项：<ul>
+<li>由于此前绘制了，所以我们通过<code>glDepthFunc(GL_NEVER);</code>语句使得片段都不通过深度测试，也就是不输出到当前<code>帧缓冲(Framebuffer)</code>中；</li>
+<li>由于我们通过<code>glClear</code>清理了模板缓冲，所以当前模板缓冲中的值都为<code>0</code>，我们通过<code>glStencilFunc(GL_ALWAYS, 1, 0xFF)</code>让选中组件对应的片段都通过模板测试，且设置<code>ref</code>参考值为1；</li>
+<li>我们通过<code>glStencilOp(GL_KEEP, GL_REPLACE, GL_REPLACE)</code>让这些片段对应的模板值都更新为<code>ref</code>参考值，也就是<code>1</code>；</li>
+<li>经过这些设置和处理，现在模板缓冲中只有选中组件对应片段的模板值是<code>1</code>，其他的都为<code>0</code>；</li>
+</ul>
+</li>
+<li>我们再绘制一遍选中的组件，这次我们把组件都绕其包围盒中心“扩大”，这样他们对应的像素区域比模板缓冲中值为<code>1</code>的像素区域“大一圈”，而这一圈的模板值是<code>0</code>！<ul>
+<li>通过<code>glStencilFunc(GL_NOTEQUAL, 1, 0xFF)</code>让外围圈的片段通过模板测试，这次我们只进行模板测试，但不更新模板缓冲中的模板值(<code>glStencilMask(0x00)</code>) ；</li>
+<li>我们恢复深度测试函数默认值，并禁用深度测试<code>glDepthFunc(GL_LESS);glDisable(GL_DEPTH_TEST);</code>，以便让通过模板测试的“外围圈”都通过深度测试，进而绘制到当前<code>帧缓冲(Framebuffer)</code>中，绘制到屏幕上；</li>
+<li>注意当前使用的片段着色器仅输出设置的外轮廓效果的颜色，也就是“外围圈”都是一种颜色。</li>
+</ul>
+</li>
+<li>我们恢复模板缓冲和深度缓冲的设置，以便后续工作的正常进行。</li>
+</ul>
+</div>
+<p>上述外轮廓绘制步骤示意图如下，</p>
+<p><img src="../img/cad/image-operate step of outlinning.png" alt="外轮廓绘制步骤" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：外轮廓绘制步骤</figcaption>
+
+<div class="admonition note">
+<p class="admonition-title">补充</p>
+<p>为了绘制组件周围的外轮廓效果，我们需要把组件都绕其包围盒中心“扩大”，扩大多少合适呢？三个轴方向的比例都一样吗？详细请看代码~</p>
+</div>
+<h2 id="294">29.4.关键代码</h2>
+<pre><code class="language-c++">void GLView::initializeGL()
+{
+    //  other init code here
+
+    //  setting of Stencil Test
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilOp(GL_KEEP, GL_REPLACE, GL_REPLACE);
+
+    //  other code......
+</code></pre>
+<pre><code class="language-c++">void GLView::paintGL()
+{
+    //  other code
+
+    //  clear stencil buffer
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    //  disable update of stencil value
+    glStencilMask(0x00);
+
+    //  other code
+
+    //  draw selected  
+    DrawSelected();
+
+    //  other code
+}
+</code></pre>
+<pre><code class="language-c++">void GLView::DrawSelected()
+{
+    //  draw selected
+    glStencilFunc(GL_ALWAYS, 1, 0xFF);
+    glStencilMask(0xFF);
+    //glDisable(GL_DEPTH_TEST);
+    glDepthFunc(GL_NEVER);
+
+    m_singleColorShader.bind();
+    m_singleColorShader.setUniformValue(&quot;projection&quot;, m_projectionMat);
+    m_singleColorShader.setUniformValue(&quot;view&quot;, m_viewMat);
+    m_singleColorShader.setUniformValue(&quot;model&quot;, m_modelMatrix);
+
+    m_model-&gt;DrawSelected(m_singleColorShader);
+
+    //  draw outline of selected
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilMask(0x00);
+    glDepthFunc(GL_LESS);
+    glDisable(GL_DEPTH_TEST);
+
+    //  TODO
+    // TODO use shaderSingleColor
+    m_model-&gt;DrawSelected(m_singleColorShader, true);
+
+    m_singleColorShader.release();
+
+    glStencilMask(0xFF);
+    glStencilFunc(GL_ALWAYS, 0, 0xFF);
+    glEnable(GL_DEPTH_TEST);
+}
+</code></pre>
+<p><code>singleColor.frag</code>：</p>
+<pre><code class="language-c">#version 450 core
+out vec4 FragColor;
+
+//in vec2 TexCoords;
+in vec3 Normal;  
+in vec3 FragPos;  
+
+//uniform sampler2D texture_diffuse1;
+uniform vec3 lightPos; 
+uniform vec3 lightColor;
+uniform vec4 objectColor;
+
+void main()
+{
+    FragColor = vec4(0.0, 1.0, 1.0, 1.0);
+}
+</code></pre>
+<h2 id="295">29.5.效果</h2>
+<p>如果一切正常，或者遇到的问题被排查解决，那么运行之后的效果如下，有问题或疑问请查看工程代码或联系我。</p>
+<p><img src="../img/cad/image-outlinning of selected.png" alt="外轮廓效果" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：外轮廓效果</figcaption>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
