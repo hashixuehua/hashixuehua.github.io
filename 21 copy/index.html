@@ -366,7 +366,7 @@
 <li>在每个渲染循环中调用<code>DrawingLinesHolder.DrawCopyElementsPreview</code>和<code>DrawingComponentHolder.drawCopyElementsPreview</code>将预览效果绘制到<code>GLView</code>中；而复制操作完成添加的数据由对应的<code>draw</code>进行绘制；</li>
 <li>当<code>ESC</code>键按下时，调用<code>ViewerSetting.ClearCopyImData</code>清除相关临时数据；</li>
 </ol>
-<p>在绘制预览数据时采用了实例化渲染的思路，由于此前渲染选中效果时已经将选中数据与渲染的桥梁<code>setup</code>完成，这里只需要更新复制操作偏移计算的（选中元素的）<code>modelMatrix</code>后再次绘制即可。</p>
+<p>由于此前渲染选中效果时已经将选中数据与渲染的桥梁<code>setup</code>完成，在绘制预览数据时只需要更新复制操作偏移计算的（选中元素的）<code>modelMatrix</code>后再次绘制即可。</p>
 <p><img src="../img/cad/image-81.png" alt="小学生水平的绘画巨作" width="500" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：小学生水平的绘画巨作</figcaption>
 
