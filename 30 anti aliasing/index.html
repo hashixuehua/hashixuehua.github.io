@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="计算机图形学课程">
+        
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/30%20anti%20aliasing/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>30 抗锯齿 - Computer Graphics</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
+        <link href="../css/admonition_fix.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-80323542-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Computer Graphics</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">主页</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../00%20about%20the%20course/">课程介绍</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">基础篇</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../01%20setup%20the%20development%20environment/">01 开发环境搭建</a>
+</li>
+
+        
+            
+<li >
+    <a href="../02%20hello%20Widget/">02 hello Widget</a>
+</li>
+
+        
+            
+<li >
+    <a href="../03%20about%20OpenGL/">03 关于OpenGL</a>
+</li>
+
+        
+            
+<li >
+    <a href="../04%20hello%20Triangle/">04 Hello Triangle</a>
+</li>
+
+        
+            
+<li >
+    <a href="../05%20coordinate%20system/">05 坐标系统</a>
+</li>
+
+        
+            
+<li >
+    <a href="../06%20add%20camera/">06 添加相机</a>
+</li>
+
+        
+            
+<li >
+    <a href="../07%20principle%20of%20camera/">07 相机原理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../08%20use%20of%20vcpkg/">08 关于vcpkg的使用</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">场景搭建</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../09%20draw%20default%20work%20plane/">09 默认工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../10%20add%20view%20cube/">10 添加视图立方体</a>
+</li>
+
+        
+            
+<li >
+    <a href="../11%20add%20label%20of%20rotate%20center/">11 添加旋转中心标识</a>
+</li>
+
+        
+            
+<li >
+    <a href="../12%20UI%20-%20add%20toolBar%20button/">12 UI：添加工具栏按钮</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">交互和绘制</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../13%20draw%20line%20and%20intro%20of%20framework%20system/">13 介绍框架体系并绘制线</a>
+</li>
+
+        
+            
+<li >
+    <a href="../14%20draw%20curve/">14 其它类型线的绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../15%20draw%20image/">15 图片绘制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../16%20add%20snap%20label/">16 添加捕捉吸附标识</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">操作和设置</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../17%20add%20some%20components%20to%20scene/">17 添加一些组件</a>
+</li>
+
+        
+            
+<li >
+    <a href="../18%20selected%20effect/">18 选中效果</a>
+</li>
+
+        
+            
+<li >
+    <a href="../19%20set%20work%20plane/">19 设置工作平面</a>
+</li>
+
+        
+            
+<li >
+    <a href="../20%20box%20select/">20 框选选择</a>
+</li>
+
+        
+            
+<li >
+    <a href="../21%20copy/">21 复制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../22%20delete/">22 删除</a>
+</li>
+
+        
+            
+<li >
+    <a href="../23%20show%20and%20hide%20controls/">23 显隐控制</a>
+</li>
+
+        
+            
+<li >
+    <a href="../24%20layer%20management/">24 图层管理</a>
+</li>
+
+        
+            
+<li >
+    <a href="../25%20wire%20frame%20mode/">25 线框模式</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">IO和其它</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../26%20about/">26 关于</a>
+</li>
+
+        
+            
+<li >
+    <a href="../27%20file%20open%20and%20save/">27 文件打开和保存</a>
+</li>
+
+        
+            
+<li >
+    <a href="../28%20other%20matters/">28 其它事项</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" class="nav-title">高级效果</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../29%20object%20outlining/">29 外轮廓效果</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">30 抗锯齿</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../code_repo/">课程代码</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../intro/">CGLib</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> 搜索
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../29%20object%20outlining/">
+                        <i class="fa fa-arrow-left"></i> 上一节
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../code_repo/">
+                        下一节 <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/hashixuehua/geometry">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://mp.weixin.qq.com/s/KRMuyvCr70Nuw5ZW0HWasw">
+                        公众号：哈市雪花
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#30anti-aliasing">30.抗锯齿(anti aliasing)</a></li>
+        
+            <li><a href="#301ssaa">30.1.超采样抗锯齿（SSAA）</a></li>
+        
+            <li><a href="#302msaa">30.2.多重采样抗锯齿（MSAA）</a></li>
+        
+            <li><a href="#303msaa">30.3.开启和使用MSAA</a></li>
+        
+            <li><a href="#304">30.4.效果</a></li>
+        
+            <li><a href="#305">30.5.自定义抗锯齿算法</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="30anti-aliasing">30.抗锯齿(anti aliasing)</h1>
+<p>大家仔细观察的话会发现我们渲染出来的模型边缘可能会有锯齿情况，在某些视角下锯齿情况很明显（如下图）。</p>
+<p><img src="../img/cad/image-aliasing effect.png" alt="锯齿情况" width="900" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：锯齿情况</figcaption>
+
+<p><br/></p>
+<p>这种锯齿情况的产生和<code>光栅器</code>中将<code>图元形状</code>转换为<code>片段</code>的方式有关，在<code>视口变换</code>过程中将坐标精确的<code>图元形状</code>变换为对应<code>像素点</code>的过程是一种“失真”的映射，因为屏幕像素是一个范围有限的二维的<code>int</code>数组。</p>
+<p><img src="../img/cad/aliasing pro.png" alt="采样过程与锯齿情况" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：采样过程与锯齿情况</figcaption>
+
+<p><br/></p>
+<p>这种锯齿情况被称之为<code>走样(Aliasing)</code>，有很多种<code>抗锯齿（Anti-aliasing，也被称为反走样）</code>的技术能够帮助我们缓解这种现象，从而产生更平滑的边缘。</p>
+<p>抗锯齿技术包括<code>超采样抗锯齿(Super Sample Anti-aliasing, SSAA)</code>、<code>多重采样抗锯齿(Multisample Anti-aliasing, MSAA)</code>、<code>FXAA (Fast Approximate AA)</code>、<code>TAA (Temporal AA)</code>等，本文主要就<code>SSAA</code>和<code>MSAA</code>进行介绍，并采用<code>MSAA</code>进行抗锯齿应用。</p>
+<h2 id="301ssaa">30.1.超采样抗锯齿（SSAA）</h2>
+<p><code>超采样抗锯齿(Super Sample Anti-aliasing, SSAA)</code>会以更高的分辨率（即超采样）来渲染场景，当图像输出到帧缓冲时会被<code>下采样(Downsample)</code>至正常的分辨率，这些额外的分辨率会被用来防止锯齿边缘的产生。<code>SSAA</code>抗锯齿效果较好，但由于其绘制了更多的片段，从而产生更多的性能开销。</p>
+<p>通过借鉴<code>SSAA</code>背后的理念，<code>MSAA(多重采样抗锯齿)</code>以更加高效的方式实现了抗锯齿，其避免了片段着色器的更多次运行。</p>
+<h2 id="302msaa">30.2.多重采样抗锯齿（MSAA）</h2>
+<p>多重采样不再使用像素中心的单一采样点，取而代之的是以特定图案排列的多个<code>子采样点(Subsample)</code>进行片段采样。</p>
+<p><img src="../img/cad/image-multi sampling.png" alt="一个片段内进行多重采样" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：一个片段内进行多重采样</figcaption>
+
+<p><br/></p>
+<p>你可能有点理解了，每个片段（像素）对应多个子采样点，位于边缘的片段对应的所有子采样点并不一定都被图元形状所覆盖，也就是片段是有<code>遮盖度</code>的，遮盖度等因素可以对其颜色施加影响。</p>
+<div class="admonition note">
+<p class="admonition-title">重要</p>
+<p>进行多重采样时，当像素内有子采样点被覆盖时，无论像素内的子采样点数量为多少，都会执行一次片段着色器。这也是<code>MSAA</code>更加高效的关键所在。</p>
+</div>
+<h3 id="3021">30.2.1.原理和逻辑</h3>
+<p>多重采样时的光栅化规则比较复杂，需要结合<code>图元形状的类型</code>、<code>像素内子采样点的遮盖度</code>、<code>片段顶点数据插值规则</code>等因素处理。而像素的最终颜色还要与<code>模板测试</code>、<code>深度测试</code>以及<code>恢复（Resolve）</code>时的处理有关系。</p>
+<p>我们先明确下几个概念：</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>光栅化：指在<code>图元组装（Shape Assembly）</code>之后到<code>片段着色器</code>之前所有经过的算法和过程；</li>
+<li>图元形状的类型：包括三角形、线、点。在光栅化阶段线被处理为一定宽度的矩形，点一般被处理为一个像素大小的矩形，便于采样；</li>
+<li>像素采样遮盖度：在光栅化阶段中对像素内的多个子采样点进行采样后计算，指被图元形状覆盖的子采样点与子采样点数量的比值；</li>
+<li>恢复（<code>Resolve</code>）阶段：<code>MSAA</code>帧缓冲需要经过一些<code>加权处理（重采样）</code>才能转换为普通的帧缓冲，这个过程称为<code>Resolve</code>。在将<code>MSAA</code>帧缓冲渲染到屏幕之前需要进行此过程； </li>
+<li>片段顶点数据插值规则：一般在片段着色器中会根据对应顶点数据（包括坐标、法线等属性）、光照等因素决定片段的颜色，而顶点数据是插值得到的（想象一下：一个三角形有3个点，但其可能覆盖n个像素，也就是用n个像素显示这个三角形；每个像素的顶点数据是插值的来的）；<ul>
+<li>当像素中心被图元形状覆盖时，顶点数据<code>插值（interpolated）</code>到像素中心；</li>
+<li>当像素中心未被图元覆盖时，顶点数据<code>外插（extrapolated）</code>到像素中心。</li>
+</ul>
+</li>
+</ul>
+</div>
+<p><img src="../img/cad/multisample color.png" alt="对多种图元进行多重采样" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：对多种图元进行多重采样</figcaption>
+
+<p><br/></p>
+<p>下图中两个三角形在多重采样时生成了几个片段？<code>子采样点遮盖度</code>、<code>片段顶点数据插值规则</code>分别时怎样的？这些片段的最终颜色是怎样的？</p>
+<p><img src="../img/cad/multisample color1.png" alt="思考 所重采样行为和结果" width="300" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：思考 所重采样行为和结果</figcaption>
+
+<p><br/></p>
+<p>现在我们将逻辑穿起来，来看一下多重采样下片段及其颜色的产生。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol>
+<li>（光栅化阶段采样时）当像素内有子采样点被图元形状覆盖时，该像素及对应数据（顶点数据插值得到）会执行片段着色器，<strong>输出的颜色将被记录在被覆盖的子采样点中</strong>；</li>
+<li>在模板测试和深度测试后可能会有部分子采样点被丢弃，<strong>颜色信息只存储于被覆盖的且通过测试的子采样点中</strong>；</li>
+<li>在恢复（Resolve）阶段对子采样点及其颜色数据进行<strong>加权处理</strong>得到像素的颜色，被保留的子采样点及颜色能够对结果产生重要影响，否则只能作为分母的一份子参与处理。</li>
+</ol>
+</div>
+<p><img src="../img/cad/image-color of multisample.png" alt="对像素进行多重采样流程" width="700" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：对像素进行多重采样流程</figcaption>
+
+<h3 id="3022">30.2.2.理论效果</h3>
+<p>一个像素中如果有更多的采样点被三角形遮盖，那么这个像素的颜色就会更接近于三角形的颜色。如果我们给最开始的三角形填充颜色，就能得到以下的效果：</p>
+<p><img src="../img/cad/effect of multisampling.png" alt="应用MSAA的理论效果" width="400" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：应用MSAA的理论效果</figcaption>
+
+<h2 id="303msaa">30.3.开启和使用MSAA</h2>
+<p>在<code>OpenGL</code>中内建了<code>MSAA</code>技术，当然要开启并应用它还需要做一点工作。</p>
+<p>由于我们此前绘制<code>鼠标旋转标识</code>时使用了<code>glReadPixels</code>接口根据像素位置读取深度进而计算鼠标旋转中心位置，而<code>MSAA</code>的帧缓冲不支持从中读取深度值，所以我们要多做一点工作来适配深度值的读取。</p>
+<div class="admonition note">
+<p class="admonition-title">MSAA适配深度值读取</p>
+<p>目前有两种方案可以适配深度值的读取：</p>
+<ol>
+<li>正常开启<code>MSAA</code>，然后在每个渲染循环中增加后处理：将当前帧缓冲<code>还原（resolve）</code>到一个中间的帧缓冲中，之后每次从这个中间的帧缓冲中读取深度值；</li>
+<li>采用离屏渲染技术，创建<code>MSAA</code>帧缓冲并在绘制时绘制到<code>MSAA</code>帧缓冲中，然后再<code>还原（resolve）</code>到屏幕对应的默认帧缓冲中，这样渲染到屏幕以及读取深度值都是在默认帧缓冲中读取的，而<code>MSAA</code>帧缓冲起到了中转的功能。</li>
+</ol>
+</div>
+<p>当前<code>GLViewer</code>采用了第二种方案，</p>
+<p><img src="../img/cad/image-MSAA Framebuffer.png" alt="MSAA帧缓冲作为绘制中转站" width="700" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：MSAA帧缓冲作为绘制中转站</figcaption>
+
+<p><br/></p>
+<p>类似于选择帧缓冲，我们创建了<code>MSAAFramebuffer</code>类，其工作方式和选择帧缓冲类似，</p>
+<ol>
+<li>在每次窗体尺寸变化时释放当前<code>MSAAFramebuffer</code>并根据新的窗口尺寸创建新的<code>MSAAFramebuffer</code>；</li>
+<li>在<code>GLView.paintGL</code>中首先调用<code>MSAAFramebuffer.EnableWriting</code>绑定到<code>MSAAFramebuffer</code>，作为渲染目标帧缓冲，之后进行正常的绘制；</li>
+<li>在渲染完成后，调用<code>MSAAFramebuffer.BlitFrameBuffer</code>将<code>MSAAFramebuffer</code>还原到默认帧缓冲（注意使用<code>defaultFramebufferObject</code>来获取）中；</li>
+<li>之后默认帧缓冲中的数据会绘制到屏幕上，而鼠标事件触发的<code>glReadPixels</code>同样会从默认帧缓冲中读取数据。</li>
+</ol>
+<p><br/></p>
+<p>在创建<code>MSAA</code>帧缓冲时，可以使用<code>多重采样纹理附件</code>或<code>多重采样渲染缓冲对象</code>作为帧缓冲的附件，在<code>GLViewer</code>中使用这两种分别作为颜色缓冲和模板深度缓冲的附件。在此过程中我们可以通过参数指定每个像素子采样点的格式，当前我们设置的值是<code>4</code>。</p>
+<pre><code class="language-C++">//other code
+glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, ViewerSetting::sampleSieOfMSAA, GL_RGB, mWidth, mHeight, GL_TRUE);
+//other code
+glRenderbufferStorageMultisample(GL_RENDERBUFFER, ViewerSetting::sampleSieOfMSAA, GL_DEPTH24_STENCIL8, mWidth, mHeight);
+//other code
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">补充</p>
+<ul>
+<li>有了之前的选择帧缓冲的使用经验，本节课程的内容理解和应用会容易的多；</li>
+<li><code>OpenGL</code>允许我们自定义自己的帧缓冲，来实现一些灵活多样的功能，我们现在自定义了两种帧缓冲啦。</li>
+</ul>
+</div>
+<h2 id="304">30.4.效果</h2>
+<p>当设置的每个像素的子采样点数量是<code>4</code>时，我们切换到本文开头齿距情况图的类似视角，效果如下，</p>
+<p><img src="../img/cad/image-samplecount4.png" alt="子采样点数量为<code>4</code>时" width="900" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：子采样点数量为`4`时</figcaption>
+
+<p>当每个像素的子采样点数量是<code>8</code>时，效果如下，</p>
+<p><img src="../img/cad/image-samplecount8-1.png" alt="子采样点数量为<code>8</code>时（视角一）" width="900" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：子采样点数量为`8`时（视角一）</figcaption>
+
+<p><img src="../img/cad/image-samplecount8-2.png" alt="子采样点数量为<code>8</code>时（视角二）" width="900" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：子采样点数量为`8`时（视角二）</figcaption>
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<ul>
+<li>开启<code>MSAA</code>后在大部分视角下锯齿效果都有较好的改善。如果仔细观看的话，组件的边线看起来“变粗”了，实际是其变的“边缘模糊”了。</li>
+<li>增大子采样点数量意味着更多的性能消耗。</li>
+</ul>
+</div>
+<h2 id="305">30.5.自定义抗锯齿算法</h2>
+<p>我们可以自定义抗锯齿算法，如采用类似于图像处理的技术对渲染的图片进行效果处理，即<code>Post Processing AA</code>，然后再渲染出来。</p>
+<p>本文不对自定义抗锯齿算法进行深入探究，相信在了解了锯齿产生的原因以及<code>MSAA</code>背后的原理后能够有助于更深入的研究。</p>
+<p><br/></p>
+
+<div id="disqus_thread"></div>
+<script>
+    (function() {
+        var d = document, s = d.createElement('script');
+
+        s.src = '//cglib.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>请启用JavaScript以浏览<a href="https://disqus.com/?ref_noscript" rel="nofollow">Disqus评论。</a></noscript></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Powered by <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://bootswatch.com/yeti/">Yeti</a></center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script src="../js/base.js"></script>
+        <script src="../mathjax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">搜索</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            请在下面输入你要搜索的文本（仅支持英文）：
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="搜索..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
