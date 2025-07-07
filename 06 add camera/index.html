@@ -404,8 +404,15 @@ if(WIN32)
 endif()
 </code></pre>
 <ul>
-<li>还有一件事，迟早得做，现在做了吧，把CGLib的dll和pdb文件拷贝到本项目的输出目录中（GLViewer.exe所在目录），默认是这里<code>out\build\x64-Debug\src</code>，如果没有更改的话。</li>
+<li>还有一件事，迟早得做，现在做了吧，把CGLib的dll和pdb文件拷贝到本项目的输出目录中（GLViewer.exe所在目录），默认是这里<code>out\build\x64-RelWithDebInfo\src</code>，如果没有更改的话。</li>
 </ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>建议用<code>ReleaseWithDebugInfo</code>配置进行开发和调试。由于<code>CGLib</code>是<code>Release</code>下编译的，对外接口的参数有<code>STL</code>容器，这样在程序中用<code>Debug</code>配置时运行就会出现报错。当然后续会考虑封装参数来避免此问题。</p>
+</div>
+<p><img src="../img/cad/releaseWithDebugInfo.png" alt="建议使用releaseWithDebugInfo配置开发和调试" title="切换到cmake项目视图" width="700" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：建议使用releaseWithDebugInfo配置开发和调试</figcaption>
+
 <h2 id="62viewersetting">6.2.添加ViewerSetting类</h2>
 <p>获取当前客户端<strong>设备像素比</strong>，并进行适配。</p>
 <div class="admonition note">
