@@ -385,6 +385,13 @@
 
 <h1 id="9">9.绘制默认的工作平面</h1>
 <p>这一节我们将绘制默认的工作平面和当前的工作平面，并用网格线进行填充，这回用到我们此前介绍过的<code>数据与渲染的桥梁</code>（<code>VAO、VBO、EBO</code>）相关知识。</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>建议用<code>ReleaseWithDebugInfo</code>配置进行开发和调试。由于<code>CGLib</code>是<code>Release</code>下编译的，对外接口的参数有<code>STL</code>容器，这样在程序中用<code>Debug</code>配置时运行就会出现报错。当然后续会考虑封装参数来避免此问题。</p>
+</div>
+<p><img src="../img/cad/releaseWithDebugInfo.png" alt="建议使用releaseWithDebugInfo配置开发和调试" title="切换到cmake项目视图" width="700" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：建议使用releaseWithDebugInfo配置开发和调试</figcaption>
+
 <h2 id="91">9.1.在顶点着色器中添加世界坐标转换处理</h2>
 <p>由于OpenGL默认是<code>y-up</code>，我们开发的Viewer是<code>z-up</code>的，为了让Viewer达到<code>正确</code>效果，我们需要叠加<code>y-up to z-up</code>的转换矩阵。</p>
 <pre><code class="language-c++">//  y-up to z-up
