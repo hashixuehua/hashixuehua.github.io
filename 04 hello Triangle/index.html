@@ -378,6 +378,8 @@
         
             <li><a href="#44glview">4.4.在GLView中调用绘制</a></li>
         
+            <li><a href="#45vs2022">4.5.使用VS2022注意事项</a></li>
+        
     
     </ul>
 </div></div>
@@ -708,6 +710,16 @@ void Model::Draw(QOpenGLShaderProgram &amp;shader)
 <p>如果没有差错，或者差错被排查解决，那么将出现如下效果，恭喜你~
 <img src="../img/cad/image-15.png" alt="三角形绘制出来" title="三角形绘制出来" width="500" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
 <figcaption style="text-align: center;">图：三角形绘制出来</figcaption>
+
+<h2 id="45vs2022">4.5.使用<code>VS2022</code>注意事项</h2>
+<p>如果使用<code>VS2022</code>进行开发和调试，需要先进行如下<code>CMake设置</code>。</p>
+<p><img src="../img/cad/vs2022 setting.png" alt="CMAKE设置" title="CMAKE设置" width="700" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：CMAKE设置</figcaption>
+
+<p><img src="../img/cad/releaseWithDebugInfo.png" alt="建议使用releaseWithDebugInfo配置开发和调试" title="切换到cmake项目视图" width="700" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：建议使用releaseWithDebugInfo配置开发和调试</figcaption>
+
+<p><br/></p>
 
 <div id="disqus_thread"></div>
 <script>
