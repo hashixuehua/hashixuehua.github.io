@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="计算机图形学课程">
         
-        <link rel="canonical" href="https://hashixuehua.github.io/geometry/img/">
+        <link rel="canonical" href="https://hashixuehua.github.io/geometry/31%20supplement%20-%20zoom%20with%20mouse%20hover%20as%20center/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>图片 - Computer Graphics</title>
+	<title>31 以鼠标点为中心缩放 - Computer Graphics</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -65,7 +65,7 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">目录 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -315,8 +315,8 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="../31%20supplement%20-%20zoom%20with%20mouse%20hover%20as%20center/">31 以鼠标点为中心缩放</a>
+<li class="active">
+    <a href="./">31 以鼠标点为中心缩放</a>
 </li>
 
         
@@ -349,13 +349,13 @@
                         <i class="fa fa-search"></i> 搜索
                     </a>
                 </li>
-                <li class="disabled">
-                    <a rel="next" >
+                <li >
+                    <a rel="next" href="../30%20anti%20aliasing/">
                         <i class="fa fa-arrow-left"></i> 上一节
                     </a>
                 </li>
-                <li class="disabled">
-                    <a rel="prev" >
+                <li >
+                    <a rel="prev" href="../code_repo/">
                         下一节 <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -383,16 +383,97 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#_1">图片</a></li>
+        <li class="main active"><a href="#31">31.相机：缩放时以鼠标点为中心</a></li>
+        
+    
+        <li class="main "><a href="#311">31.1.思考和讨论</a></li>
+        
+    
+        <li class="main "><a href="#312">31.2.原理</a></li>
+        
+    
+        <li class="main "><a href="#313">31.3.关键代码</a></li>
+        
+    
+        <li class="main "><a href="#314">31.4.效果</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="_1">图片</h1>
-<p>这个目录中所有图片和文件仅为保持教程的完整性以及可用性。文件为<a href="公众号：geometrylib">哈市雪花</a>所有。所有权利均保留。<br />
-The images and files under this directory are here for integrity and accessibility purposes. All credit goes to <a href="公众号：geometrylib">哈市雪花</a>. All rights reserved.</p>
+<h1 id="31">31.相机：缩放时以鼠标点为中心</h1>
+<p>在三维软件中，‌以鼠标点为中心缩放可以做到保持聚焦点位置不变，达到视觉上的“中心点聚焦”。这种技术常用于电影镜头语言和游戏场景设计中，通过动态调整视角和物体大小，使用户始终关注特定区域。</p>
+<h1 id="311">31.1.思考和讨论</h1>
+<p>通常我们会通过鼠标滚轮事件实现场景缩放，而在场景中进行缩放时，会以相机当前的<code>Position</code>（也就是视点）为观察位置进行缩放，通过滚轮滑动的方向和幅度来更新相机的<code>Zoom</code>。</p>
+<div class="admonition note">
+<p class="admonition-title">回顾</p>
+<p>你应该还记得在<code>顶点着色器</code>中将坐标点转换为<code>裁剪坐标</code>过程中需要经过<code>modelMatrix</code>、<code>viewMatrix</code>和<code>projectionMatrix</code>的处理，而<code>projectionMatrix</code>的构造与<code>Zoom</code>有关系，当然还与<code>近平面</code>、<code>远平面</code>、<code>宽高比</code>有关。</p>
+</div>
+<p>在不考虑鼠标位置进行缩放时，会以固定的<code>Position</code>进行观察，而仅仅改变<code>Zoom</code>的大小，这样会出现无论鼠标在场景中任何位置进行滚动，缩放行为都不会考虑鼠标位置，也就是不会考虑我们当前关注的位置。为了实现以鼠标点为中心的缩放，我们还需要更新相机的<code>Position</code>来实现聚焦点的“固定”，这也意味着我们需要同时更新<code>viewMatrix</code>和<code>projectionMatrix</code>。</p>
+<div class="admonition note">
+<p class="admonition-title">想象和思考</p>
+<p>在原理和实现讲解之前，我们先一起想象一下。</p>
+<ul>
+<li>鼠标在<code>(curPx,curPy)</code>像素位置进行滚轮放大，当前视角下场景会放大，我们现在看到的范围更小了（也更清晰了），这也意味着<code>(curPx,curPy)</code>像素原本对应的场景位置（<code>curScenePos</code>）可能移出我们屏幕范围了！</li>
+</ul>
+<p>怎么样让它固定在<code>(curPx,curPy)</code>像素位置而不是移动呢？</p>
+</div>
+<p>在上述情景想象中，</p>
+<ul>
+<li>观察矩阵<code>viewMatrix</code>没有任何变化（也就是观察空间中的效果没有变化）；</li>
+<li>而由于<code>Zoom</code>的变化，<code>透视平截头体</code>的范围变小了，可见的场景空间变小了（<code>近平面</code>和<code>远平面</code>尺寸变小了）；</li>
+<li><code>(curPx,curPy)</code>像素原本对应的场景位置（<code>curScenePos</code>）可能已经不在<code>透视平截头体</code>的范围内了，当然该像素现在对应到另一个场景位置（<code>nextScenePos</code>）了；</li>
+</ul>
+<p>我们需要把<code>(curPx,curPy)</code>像素位置固定在对应的场景位置上，那么移动相机的<code>Position</code>就好了，让它靠近原本聚焦点（对应的场景位置）。是的，其实逻辑挺简单的，至于要移动多少？那就移动<code>curScenePos</code> - <code>nextScenePos</code>。</p>
+<p><code>nextScenePos</code>怎么计算？以相同的<code>(curPx,curPy)</code>和<code>depth</code>来计算场景空间坐标系对应位置就好了。</p>
+<h1 id="312">31.2.原理</h1>
+<p>我们先不考虑透视投影或者正交投影的概念（这和当前的逻辑原理没有什么关系）。在<code>Zoom</code>更新后，<code>平截头体</code>的范围变化了，<code>(curPx,curPy)</code>屏幕像素对应了新的场景位置（<code>nextScenePos</code>），我们只需要（通过平移<code>Position</code>）把这个位置“平移”到原本对应的场景位置（<code>curScenePos</code>），这样聚焦的目标就“固定”住了。</p>
+<p><img src="../img/cad/trans position of camera.png" alt="偏移Position，实现鼠标点的聚焦" width="600" align="middle" style="display: block; margin-left: auto; margin-right: auto;"/></p>
+<figcaption style="text-align: center;">图：偏移Position，实现鼠标点的聚焦</figcaption>
+
+<p>上图展示了缩放前后、<code>Position</code>平移前后的逻辑示意：</p>
+<ol>
+<li>缩放前鼠标像素位置对应一个场景空间位置<code>curScenePos</code>（为我们聚焦的位置）；</li>
+<li>放大后，<code>curScenePos</code>不可见了，而鼠标像素位置对应了另一个场景空间位置<code>nextScenePos</code>了；</li>
+<li>我们把<code>Camera.Position</code>移动(<code>curScenePos</code> - <code>nextScenePos</code>)向量，鼠标像素位置重新对应到了原本的<code>curScenePos</code>；</li>
+<li>这样就实现‌了保持聚焦点位置不变的以鼠标点为中心缩放。</li>
+</ol>
+<h1 id="313">31.3.关键代码</h1>
+<pre><code class="language-C++">void ProcessMouseScroll(float yoffset)
+{
+    //  scale by the mouse hover point if it's pixes is valid
+    QVector3D curPt;
+    float depth;
+    bool hoverValid = ViewerSetting::mouseScaleByCenter &amp;&amp; GetScenePoint(ViewerSetting::currentMousePos[0], ViewerSetting::currentMousePos[1], curPt, depth);
+
+    //  modify zoom
+    float downValue = 1.0f;
+    float upValue = 89.f/*45.0f*/;
+    Zoom -= (float)yoffset;
+    if (Zoom &lt; downValue)
+        Zoom = downValue;
+    if (Zoom &gt; upValue)
+        Zoom = upValue;
+
+    if (hoverValid)
+    {
+        //  cal point of current pixes
+        QVector3D nextPt;
+        GetScenePoint(ViewerSetting::currentMousePos[0], ViewerSetting::currentMousePos[1], depth, nextPt);
+
+        //  move Position
+        Position += (curPt - nextPt);
+    }
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">思考</p>
+<p>为什么在计算<code>nextPt</code>时的<code>depth</code>参数要用此前<code>curPt</code>对应的值呢？读者可自行思考。</p>
+</div>
+<h1 id="314">31.4.效果</h1>
+<p>可在视频课程中观看效果：<a href="https://www.bilibili.com/cheese/play/ss168681371">哔哩哔哩bilibili</a>。</p>
+<p><br/></p>
 
 <div id="disqus_thread"></div>
 <script>
